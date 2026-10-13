@@ -5,3 +5,10 @@
 __pycache__/
 *.pyc
 .DS_Store
+.venv/
+.env
+.env.*
+.streamlit/secrets.toml
+__pycache__/
+*.pyc
+.DS_Store
