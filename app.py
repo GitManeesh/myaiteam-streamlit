@@ -14,147 +14,161 @@ st.markdown(
     """
     <style>
       :root {
-        --mx-navy: #081e35;
-        --mx-navy-2: #0a2540;
-        --mx-cyan: #00d4ff;
-        --mx-cyan-2: #0aa8d2;
-        --mx-violet: #7c5cff;
-        --mx-ink: #122b43;
-        --mx-muted: #687b8d;
-        --mx-line: #e3eaf0;
-        --mx-soft: #f5f8fb;
-        --mx-white: #ffffff;
+        --bg: #212121;
+        --panel: #2f2f2f;
+        --panel-2: #262626;
+        --panel-3: #303030;
+        --text: #ececec;
+        --muted: #a6a6a6;
+        --line: #3f3f3f;
+        --accent: #00d4ff;
+        --accent-2: #0aa8d2;
       }
 
       html, body, [class*="css"] {
         font-family: Arial, Helvetica, sans-serif;
       }
 
-      .stApp {
-        background:
-          radial-gradient(circle at 88% 0%, rgba(0, 212, 255, 0.08), transparent 24rem),
-          linear-gradient(180deg, #f7fafc 0%, #ffffff 38%);
-        color: var(--mx-ink);
+      html, body, .stApp, [data-testid="stAppViewContainer"] {
+        background: var(--bg) !important;
+        color: var(--text) !important;
       }
 
       [data-testid="stHeader"] {
-        background: rgba(255,255,255,.86);
-        backdrop-filter: blur(14px);
-        border-bottom: 1px solid rgba(227,234,240,.85);
-      }
-
-      [data-testid="stAppViewContainer"] > .main {
-        background: transparent;
-      }
-
-      .block-container {
-        max-width: 1240px;
-        padding-top: 2.2rem;
-        padding-bottom: 4rem;
+        background: rgba(33,33,33,.94) !important;
+        border-bottom: 1px solid #2b2b2b;
+        backdrop-filter: blur(12px);
       }
 
       #MainMenu {visibility: hidden;}
       footer {visibility: hidden;}
 
-      .mx-hero {
-        position: relative;
-        overflow: hidden;
-        border-radius: 24px;
-        padding: 34px 38px;
-        margin-bottom: 22px;
-        color: #fff;
-        background:
-          radial-gradient(circle at 82% 35%, rgba(0,212,255,.22), transparent 30%),
-          linear-gradient(135deg, #081e35 0%, #0a2540 58%, #103d59 100%);
-        border: 1px solid rgba(255,255,255,.08);
-        box-shadow: 0 24px 70px rgba(8,30,53,.16);
+      .block-container {
+        max-width: 980px;
+        padding-top: 1.35rem;
+        padding-bottom: 5rem;
       }
 
-      .mx-hero:after {
-        content: "";
-        position: absolute;
-        width: 340px;
-        height: 340px;
-        right: -90px;
-        top: -150px;
-        border-radius: 50%;
-        border: 1px solid rgba(0,212,255,.24);
-        box-shadow:
-          0 0 0 38px rgba(0,212,255,.045),
-          0 0 0 78px rgba(0,212,255,.025);
+      .mx-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin: 2px 0 22px;
+      }
+
+      .mx-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #f4f4f4;
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: -.35px;
+      }
+
+      .mx-brand-dot {
+        width: 24px;
+        height: 24px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #00d4ff, #7c5cff);
+        color: #081e35;
+        font-size: 12px;
+      }
+
+      .mx-status {
+        color: #9e9e9e;
+        font-size: 12px;
+      }
+
+      .mx-hero {
+        max-width: 760px;
+        margin: 72px auto 38px;
+        text-align: center;
       }
 
       .mx-kicker {
-        position: relative;
-        z-index: 1;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--mx-cyan);
-        font-size: 11px;
+        color: var(--accent);
+        font-size: 12px;
         font-weight: 800;
-        letter-spacing: 1.8px;
+        letter-spacing: 1.3px;
         text-transform: uppercase;
-      }
-
-      .mx-kicker:before {
-        content: "";
-        width: 22px;
-        height: 2px;
-        background: var(--mx-cyan);
+        margin-bottom: 14px;
       }
 
       .mx-title {
-        position: relative;
-        z-index: 1;
-        margin: 12px 0 8px;
-        font-size: clamp(34px, 4vw, 54px);
-        line-height: 1.05;
-        letter-spacing: -2.5px;
+        margin: 0;
+        color: #f4f4f4;
+        font-size: clamp(34px, 4.6vw, 52px);
+        line-height: 1.08;
+        letter-spacing: -2.3px;
         font-weight: 800;
       }
 
-      .mx-title span { color: var(--mx-cyan); }
+      .mx-title span {
+        color: var(--accent);
+      }
 
       .mx-subtitle {
-        position: relative;
-        z-index: 1;
-        max-width: 720px;
-        margin: 0;
-        color: #bfd0df;
+        max-width: 650px;
+        margin: 14px auto 0;
+        color: #a9a9a9;
         font-size: 15px;
         line-height: 1.65;
       }
 
-      .mx-meta {
-        position: relative;
-        z-index: 1;
+      .stLinkButton {
         display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 22px;
+        justify-content: center;
+        margin-bottom: 22px;
       }
 
-      .mx-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        border-radius: 999px;
-        padding: 7px 11px;
-        background: rgba(255,255,255,.08);
-        border: 1px solid rgba(255,255,255,.12);
-        color: #d5e2ec;
-        font-size: 11px;
+      .stLinkButton > a {
+        border-radius: 999px !important;
+        border: 1px solid var(--line) !important;
+        background: #2b2b2b !important;
+        color: #dcdcdc !important;
+        min-height: 38px !important;
+        padding: 0 15px !important;
+        font-weight: 700 !important;
+      }
+
+      div[data-baseweb="tab-list"] {
+        gap: 6px;
+        padding: 5px;
+        margin: 0 auto 24px;
+        overflow-x: auto;
+        border: 1px solid #3a3a3a;
+        border-radius: 13px;
+        background: #292929;
+      }
+
+      button[data-baseweb="tab"] {
+        height: 38px;
+        white-space: nowrap;
+        border-radius: 9px;
+        padding: 0 13px;
+        color: #aaa !important;
+        font-size: 12px;
         font-weight: 700;
       }
 
+      button[data-baseweb="tab"] p {
+        color: inherit !important;
+      }
+
+      button[data-baseweb="tab"][aria-selected="true"] {
+        color: #f2f2f2 !important;
+        background: #3a3a3a !important;
+      }
+
       .mx-tool-card {
-        margin: 18px 0 18px;
-        padding: 22px 24px;
-        background: rgba(255,255,255,.92);
-        border: 1px solid var(--mx-line);
-        border-radius: 18px;
-        box-shadow: 0 12px 35px rgba(10,37,64,.06);
+        max-width: 820px;
+        margin: 26px auto 16px;
+        padding: 0 4px;
+        background: transparent;
       }
 
       .mx-tool-head {
@@ -164,154 +178,153 @@ st.markdown(
       }
 
       .mx-tool-icon {
-        width: 42px;
-        height: 42px;
-        flex: 0 0 42px;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
         display: grid;
         place-items: center;
-        border-radius: 12px;
-        background: #eafaff;
-        color: #067fa2;
-        font-size: 19px;
+        border-radius: 11px;
+        background: #343434;
+        border: 1px solid #444;
+        color: var(--accent);
+        font-size: 17px;
         font-weight: 800;
       }
 
       .mx-tool-card h3 {
-        margin: 0 0 5px;
-        color: var(--mx-navy);
-        font-size: 21px;
+        margin: 1px 0 5px;
+        color: #f2f2f2;
+        font-size: 22px;
         letter-spacing: -.6px;
       }
 
       .mx-tool-card p {
         margin: 0;
-        color: var(--mx-muted);
+        color: #9f9f9f;
         font-size: 13px;
-        line-height: 1.6;
+        line-height: 1.55;
       }
 
-      div[data-baseweb="tab-list"] {
-        gap: 6px;
-        padding: 6px;
-        margin-top: 6px;
-        margin-bottom: 14px;
-        overflow-x: auto;
-        border: 1px solid var(--mx-line);
-        border-radius: 14px;
-        background: rgba(255,255,255,.92);
-        box-shadow: 0 10px 30px rgba(10,37,64,.05);
-      }
-
-      button[data-baseweb="tab"] {
-        height: 40px;
-        white-space: nowrap;
-        border-radius: 9px;
-        padding: 0 14px;
-        color: #53697b;
-        font-size: 12px;
-        font-weight: 800;
-      }
-
-      button[data-baseweb="tab"][aria-selected="true"] {
-        color: #fff !important;
-        background: var(--mx-navy-2) !important;
-      }
-
-      button[data-baseweb="tab"][aria-selected="true"] p {
-        color: #fff !important;
+      [data-testid="stTextArea"] {
+        max-width: 820px;
+        margin: 0 auto;
       }
 
       [data-testid="stTextArea"] textarea {
-        min-height: 190px !important;
-        border-radius: 16px !important;
-        border: 1px solid #dce6ed !important;
-        background: #fbfdff !important;
-        padding: 16px !important;
-        color: var(--mx-ink) !important;
-        box-shadow: inset 0 1px 2px rgba(10,37,64,.025);
+        min-height: 210px !important;
+        border-radius: 22px !important;
+        border: 1px solid #444 !important;
+        background: #2f2f2f !important;
+        color: #f1f1f1 !important;
+        padding: 18px 18px 48px !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,.14) !important;
+        caret-color: #fff;
+      }
+
+      [data-testid="stTextArea"] textarea::placeholder {
+        color: #888 !important;
       }
 
       [data-testid="stTextArea"] textarea:focus {
-        border-color: var(--mx-cyan-2) !important;
-        box-shadow: 0 0 0 3px rgba(0,212,255,.12) !important;
+        border-color: #565656 !important;
+        box-shadow: 0 0 0 1px #565656, 0 12px 30px rgba(0,0,0,.18) !important;
       }
 
-      .stButton > button,
-      .stLinkButton > a {
-        min-height: 42px;
-        border-radius: 10px !important;
-        border: 1px solid #d9e4eb !important;
+      div[data-testid="stHorizontalBlock"] {
+        max-width: 820px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .stButton > button {
+        min-height: 40px;
+        border-radius: 999px !important;
+        border: 1px solid #4a4a4a !important;
         font-weight: 800 !important;
-        transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+        transition: transform .16s ease, background .16s ease;
       }
 
       .stButton > button[kind="primary"] {
-        color: #08243d !important;
-        background: var(--mx-cyan) !important;
-        border-color: var(--mx-cyan) !important;
-        box-shadow: 0 10px 22px rgba(0,212,255,.18);
+        color: #081e35 !important;
+        background: var(--accent) !important;
+        border-color: var(--accent) !important;
       }
 
-      .stButton > button:hover,
-      .stLinkButton > a:hover {
+      .stButton > button:hover {
         transform: translateY(-1px);
-        border-color: #b8cad6 !important;
-      }
-
-      .stButton > button[kind="primary"]:hover {
-        box-shadow: 0 14px 28px rgba(0,212,255,.24);
       }
 
       [data-testid="stAlert"] {
+        max-width: 820px;
+        margin-left: auto;
+        margin-right: auto;
         border-radius: 14px;
-        border: 1px solid var(--mx-line);
+        border: 1px solid #444 !important;
+        background: #2b2b2b !important;
+        color: #e8e8e8 !important;
       }
 
       [data-testid="stExpander"] {
-        border: 1px solid var(--mx-line);
-        border-radius: 14px;
+        border: 1px solid #444 !important;
+        border-radius: 14px !important;
         overflow: hidden;
-        background: #fff;
+        background: #2b2b2b !important;
+      }
+
+      [data-testid="stExpander"] summary,
+      [data-testid="stExpander"] p,
+      [data-testid="stExpander"] span {
+        color: #e8e8e8 !important;
       }
 
       .mx-result-title {
-        margin: 26px 0 10px;
-        color: var(--mx-navy);
+        max-width: 820px;
+        margin: 30px auto 10px;
+        color: #f0f0f0;
         font-size: 20px;
         font-weight: 800;
         letter-spacing: -.5px;
       }
 
+      [data-testid="stMarkdownContainer"] {
+        color: #e8e8e8;
+      }
+
+      [data-testid="stMarkdownContainer"] p,
+      [data-testid="stMarkdownContainer"] li {
+        color: #d0d0d0;
+      }
+
       .mx-about-grid {
         display: grid;
         grid-template-columns: repeat(2,minmax(0,1fr));
-        gap: 16px;
-        margin-top: 14px;
+        gap: 14px;
+        max-width: 820px;
+        margin: 34px auto 0;
       }
 
       .mx-about-card {
-        padding: 20px;
-        border: 1px solid var(--mx-line);
+        padding: 18px;
+        border: 1px solid #3f3f3f;
         border-radius: 16px;
-        background: #fff;
-        box-shadow: 0 10px 28px rgba(10,37,64,.045);
+        background: #292929;
       }
 
       .mx-about-card strong {
         display: block;
-        color: var(--mx-navy);
+        color: #f1f1f1;
         margin-bottom: 7px;
       }
 
       .mx-about-card span {
-        color: var(--mx-muted);
+        color: #a5a5a5;
         font-size: 13px;
         line-height: 1.55;
       }
 
       @media (max-width: 760px) {
-        .block-container { padding-top: 1rem; }
-        .mx-hero { padding: 26px 22px; border-radius: 18px; }
+        .block-container { padding: 1rem 1rem 4rem; }
+        .mx-hero { margin-top: 42px; }
         .mx-title { font-size: 36px; }
         .mx-about-grid { grid-template-columns: 1fr; }
       }
@@ -322,18 +335,21 @@ st.markdown(
 
 st.markdown(
     """
-    <section class="mx-hero">
-      <div class="mx-kicker">Mapranex AI workspace</div>
-      <div class="mx-title">Practical AI for <span>quality engineering.</span></div>
-      <p class="mx-subtitle">
-        Analyze requirements, generate test coverage, validate APIs, summarize documents,
-        and solve QA problems from one secure workspace connected to your n8n automation stack.
-      </p>
-      <div class="mx-meta">
-        <span class="mx-pill">✦ OmniRoute powered</span>
-        <span class="mx-pill">↔ n8n automated</span>
-        <span class="mx-pill">◈ Secure gateway</span>
+    <div class="mx-topbar">
+      <div class="mx-brand">
+        <span class="mx-brand-dot">✦</span>
+        <span>Mapranex AI</span>
       </div>
+      <div class="mx-status">Secure AI workspace</div>
+    </div>
+
+    <section class="mx-hero">
+      <div class="mx-kicker">AI Tools</div>
+      <div class="mx-title">What can I help you <span>build or test?</span></div>
+      <p class="mx-subtitle">
+        Use focused AI tools for requirements, test design, API quality, document analysis,
+        and QA engineering — all connected to your secure n8n + OmniRoute stack.
+      </p>
     </section>
     """,
     unsafe_allow_html=True,
