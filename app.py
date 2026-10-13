@@ -197,18 +197,23 @@ st.markdown(
 
       /* Main top bar */
       .block-container {
-        max-width:780px;
-        padding-top:0;
-        padding-bottom:11rem;
+        max-width: 980px !important;
+        padding-top: 0 !important;
+        padding-bottom: 13rem !important;
+        margin: 0 auto !important;
       }
 
       .mx-topbar {
-        height:44px;
+        height: 52px;
         display:flex;
         align-items:center;
         justify-content:space-between;
         border-bottom:1px solid #242424;
         margin-bottom:0;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background:#000;
       }
 
       .mx-top-title {
@@ -226,8 +231,9 @@ st.markdown(
 
       /* Conversation area */
       .mx-page-head {
-        max-width:780px;
-        margin:26px auto 18px;
+        max-width: 780px;
+        margin: 34px auto 18px;
+        padding: 0 2px;
       }
 
       .mx-eyebrow {
@@ -242,9 +248,9 @@ st.markdown(
       .mx-page-title {
         margin:0;
         color:#f2f2f2;
-        font-size:28px;
+        font-size: 32px;
         line-height:1.15;
-        letter-spacing:-1.1px;
+        letter-spacing:-1.25px;
         font-weight:750;
       }
 
@@ -258,7 +264,7 @@ st.markdown(
 
       .mx-empty {
         max-width:780px;
-        min-height:360px;
+        min-height: 300px;
         margin:0 auto;
         display:flex;
         align-items:center;
@@ -310,61 +316,88 @@ st.markdown(
 
       /* ChatGPT-style bottom composer */
       [data-testid="stBottom"] {
-        left:300px!important;
-        right:0!important;
-        width:auto!important;
-        background:linear-gradient(180deg,rgba(0,0,0,0) 0%,#000 28%,#000 100%)!important;
-        padding:20px 0 18px!important;
+        position: fixed !important;
+        left: 300px !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: auto !important;
+        z-index: 1000 !important;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 24%, #000 100%) !important;
+        padding: 30px 0 24px !important;
+        border: 0 !important;
       }
 
       [data-testid="stBottom"] > div,
       [data-testid="stBottomBlockContainer"] {
-        max-width:780px!important;
-        width:calc(100% - 32px)!important;
-        margin:0 auto!important;
-        padding:0!important;
-        background:transparent!important;
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: 0 !important;
       }
 
       [data-testid="stChatInput"] {
-        border:1px solid #404040!important;
-        border-radius:28px!important;
-        background:#2f2f2f!important;
-        box-shadow:0 8px 32px rgba(0,0,0,.38)!important;
-        overflow:hidden;
+        position: relative !important;
+        width: 780px !important;
+        max-width: calc(100vw - 350px) !important;
+        min-height: 150px !important;
+        margin: 0 auto !important;
+        border: 1px solid #3f3f3f !important;
+        border-radius: 28px !important;
+        background: #2f2f2f !important;
+        box-shadow: 0 10px 34px rgba(0,0,0,.42) !important;
+        overflow: hidden !important;
+      }
+
+      [data-testid="stChatInput"] > div,
+      [data-testid="stChatInput"] section,
+      [data-testid="stChatInput"] div {
+        background: #2f2f2f !important;
+        border: 0 !important;
       }
 
       [data-testid="stChatInput"] textarea {
-        color:#f1f1f1!important;
-        background:transparent!important;
-        min-height:230px!important;
-        max-height:230px!important;
-        padding:22px 72px 28px 20px!important;
-        font-size:16px!important;
-        line-height:1.5!important;
+        width: 100% !important;
+        min-height: 150px !important;
+        max-height: 220px !important;
+        padding: 22px 72px 50px 22px !important;
+        background: #2f2f2f !important;
+        color: #ececec !important;
+        -webkit-text-fill-color: #ececec !important;
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+        border: 0 !important;
+        outline: none !important;
+        box-shadow: none !important;
+        resize: none !important;
       }
 
       [data-testid="stChatInput"] textarea::placeholder {
-        color:#868686!important;
+        color: #8a8a8a !important;
+        -webkit-text-fill-color: #8a8a8a !important;
+        opacity: 1 !important;
       }
 
       [data-testid="stChatInput"] button {
-        width:38px!important;
-        height:38px!important;
-        min-height:38px!important;
-        margin-right:14px!important;
-        margin-bottom:14px!important;
-        border:0!important;
-        border-radius:50%!important;
-        color:#071c32!important;
-        background:#0a84ff!important;
+        position: absolute !important;
+        right: 14px !important;
+        bottom: 14px !important;
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        min-height: 38px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        border-radius: 50% !important;
+        color: #fff !important;
+        background: #0a84ff !important;
+        box-shadow: none !important;
       }
 
-      /* Remove the white host strip around the bottom composer */
-      [data-testid="stBottom"],
-      [data-testid="stBottom"] *,
-      [data-testid="stBottomBlockContainer"] {
-        border-top-color:transparent!important;
+      [data-testid="stChatInput"] button:hover {
+        background: #2b95ff !important;
       }
 
       .mx-about-grid {
@@ -401,6 +434,11 @@ st.markdown(
 
         [data-testid="stBottom"] {
           left:0!important;
+        }
+
+        [data-testid="stChatInput"] {
+          width: calc(100vw - 28px) !important;
+          max-width: calc(100vw - 28px) !important;
         }
 
         .block-container {
@@ -643,6 +681,7 @@ else:
     st.markdown(
         f"""
         <div class="mx-page-head">
+          <div class="mx-eyebrow">Mapranex AI Tool</div>
           <div class="mx-page-title">{config["title"]}</div>
           <p class="mx-page-subtitle">{config["description"]}</p>
         </div>
