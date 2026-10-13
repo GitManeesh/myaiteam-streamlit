@@ -63,31 +63,33 @@ st.markdown(
       }
 
       [data-testid="stSidebar"] > div:first-child {
-        padding:10px 8px 18px;
+        padding:0 10px 18px;
       }
 
       .mx-side-top {
         display:flex;
-        align-items:center;
-        justify-content:space-between;
-        padding:4px 5px 14px;
+        align-items:flex-start;
+        justify-content:flex-start;
+        padding:14px 6px 16px;
+        border-bottom:1px solid #222;
+        margin-bottom:14px;
       }
 
       .mx-brand {
         display:inline-flex;
         align-items:center;
         color:#fff;
-        font-size:25px;
+        font-size:23px;
         font-weight:800;
-        letter-spacing:-1.5px;
+        letter-spacing:-1.35px;
         white-space:nowrap;
       }
 
       .mx-brand img {
-        width:32px;
-        height:32px;
+        width:36px;
+        height:36px;
         object-fit:contain;
-        margin-right:11px;
+        margin-right:10px;
         border-radius:0;
         display:block;
       }
@@ -98,36 +100,21 @@ st.markdown(
       }
 
       .mx-brand-subtitle {
-        margin:6px 0 0 43px;
-        color:#747474;
-        font-size:11px;
+        margin:4px 0 0 46px;
+        color:#707070;
+        font-size:10px;
         line-height:1.35;
-        letter-spacing:0;
-        font-weight:500;
-      }
-
-      .mx-side-icon {
-        color:#8d8d8d;
-        font-size:17px;
-      }
-
-      .mx-new {
-        margin:0 2px 14px;
-        padding:11px 12px;
-        border-radius:9px;
-        background:#202020;
-        border:1px solid #2f2f2f;
-        color:#dcdcdc;
-        font-size:13px;
-        font-weight:650;
+        letter-spacing:.2px;
+        font-weight:600;
+        text-transform:uppercase;
       }
 
       .mx-section {
-        margin:14px 10px 7px;
+        margin:10px 10px 8px;
         color:#666;
         font-size:10px;
         font-weight:800;
-        letter-spacing:1px;
+        letter-spacing:1.05px;
         text-transform:uppercase;
       }
 
@@ -136,7 +123,7 @@ st.markdown(
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] {
-        gap:3px;
+        gap:4px;
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] input[type="radio"] {
@@ -144,45 +131,49 @@ st.markdown(
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] label {
-        min-height:40px;
-        padding:0 11px!important;
-        border-radius:8px;
-        color:#bdbdbd!important;
+        min-height:42px;
+        padding:0 12px!important;
+        border-radius:9px;
+        color:#b9b9b9!important;
         background:transparent;
-        transition:background .14s ease,color .14s ease;
+        transition:background .14s ease,color .14s ease, transform .14s ease;
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] label:hover {
-        background:#242424;
+        background:#1c1c1c;
         color:#fff!important;
+        transform:translateX(2px);
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) {
         background:#202020;
         color:#fff!important;
+        box-shadow:inset 3px 0 0 #00d4ff;
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] label p {
         color:inherit!important;
         font-size:13px;
-        font-weight:600;
+        font-weight:650;
       }
 
       [data-testid="stSidebar"] .stLinkButton {
-        margin:16px 2px 0;
+        margin:22px 4px 0;
+        padding-top:14px;
+        border-top:1px solid #222;
       }
 
       [data-testid="stSidebar"] .stLinkButton > a {
         width:100%;
         justify-content:flex-start;
-        min-height:40px;
+        min-height:42px;
         padding:0 12px;
-        border-radius:8px!important;
-        border:0!important;
-        background:transparent!important;
-        color:#bdbdbd!important;
+        border-radius:9px!important;
+        border:1px solid #252525!important;
+        background:#111!important;
+        color:#c9c9c9!important;
         font-size:13px;
-        font-weight:600;
+        font-weight:650;
       }
 
       [data-testid="stSidebar"] .stLinkButton > a:hover {
@@ -191,10 +182,8 @@ st.markdown(
       }
 
       .mx-side-bottom {
-        margin:26px 4px 0;
-        padding-top:14px;
-        border-top:1px solid #292929;
-        color:#666;
+        margin:14px 6px 0;
+        color:#5f5f5f;
         font-size:10px;
         line-height:1.55;
       }
@@ -616,21 +605,19 @@ with st.sidebar:
             </div>
             <div class="mx-brand-subtitle">AI Tools</div>
           </div>
-          <span class="mx-side-icon">⌕</span>
         </div>
-        <div class="mx-new">＋ New analysis</div>
-        <div class="mx-section">Tools</div>
+        <div class="mx-section">AI Tools</div>
         """,
         unsafe_allow_html=True,
     )
 
     page = st.radio(
         "Navigation",
-        ["Requirements", "Test Cases", "API Tests", "Summarizer", "QA Assistant", "About"],
+        ["◇  Requirements", "✓  Test Cases", "↗  API Tests", "≡  Summarizer", "✦  QA Assistant", "ⓘ  About"],
         label_visibility="collapsed",
     )
 
-    st.link_button("↗ Main website", "https://myaiteam-company.vercel.app/")
+    st.link_button("↗  Main website", "https://myaiteam-company.vercel.app/")
 
     st.markdown(
         """
@@ -641,6 +628,15 @@ with st.sidebar:
         """,
         unsafe_allow_html=True,
     )
+
+page = (
+    page.replace("◇  ", "")
+        .replace("✓  ", "")
+        .replace("↗  ", "")
+        .replace("≡  ", "")
+        .replace("✦  ", "")
+        .replace("ⓘ  ", "")
+)
 
 
 st.markdown(
