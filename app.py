@@ -15,15 +15,15 @@ st.markdown(
     """
     <style>
       :root {
-        --bg:#000000;
-        --sidebar:#050505;
-        --panel:#2f2f2f;
-        --panel-2:#1f1f1f;
-        --panel-3:#303030;
-        --line:#2b2b2b;
-        --text:#ececec;
-        --muted:#9b9b9b;
-        --accent:#0a84ff;
+        --bg: #000000;
+        --sidebar: #050505;
+        --panel: #2f2f2f;
+        --panel-hover: #1d1d1d;
+        --line: #242424;
+        --text: #ececec;
+        --muted: #8f8f8f;
+        --cyan: #00d4ff;
+        --blue: #0a84ff;
       }
 
       html, body, [class*="css"] {
@@ -31,280 +31,258 @@ st.markdown(
       }
 
       html, body, .stApp, [data-testid="stAppViewContainer"] {
-        background:#000!important;
-        color:var(--text)!important;
+        background: var(--bg) !important;
+        color: var(--text) !important;
       }
 
-      /* Hide Streamlit's in-app chrome where possible */
       #MainMenu,
       footer,
       [data-testid="stToolbar"],
       [data-testid="stDecoration"],
       [data-testid="stStatusWidget"],
       [data-testid="stHeaderActionElements"],
-      [data-testid="stSidebarCollapsedControl"],
       [data-testid="stAppDeployButton"] {
-        display:none!important;
-        visibility:hidden!important;
+        display: none !important;
+        visibility: hidden !important;
       }
 
       [data-testid="stHeader"] {
-        background:transparent!important;
-        height:0!important;
-        min-height:0!important;
+        background: transparent !important;
+        height: 0 !important;
+        min-height: 0 !important;
+      }
+
+      [data-testid="stSidebarCollapsedControl"] {
+        display: none !important;
       }
 
       /* Sidebar */
       [data-testid="stSidebar"] {
-        background:var(--sidebar)!important;
-        border-right:1px solid #242424;
-        width:300px!important;
-        min-width:300px!important;
+        width: 300px !important;
+        min-width: 300px !important;
+        background: var(--sidebar) !important;
+        border-right: 1px solid var(--line) !important;
       }
 
       [data-testid="stSidebar"] > div:first-child {
-        padding:0 10px 18px;
+        padding: 0 10px 18px !important;
       }
 
-      .mx-side-top {
-        display:flex;
-        align-items:flex-start;
-        justify-content:flex-start;
-        padding:14px 6px 16px;
-        border-bottom:1px solid #222;
-        margin-bottom:14px;
+      .mx-brand-wrap {
+        padding: 18px 8px 18px;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 14px;
       }
 
       .mx-brand {
-        display:inline-flex;
-        align-items:center;
-        color:#fff;
-        font-size:23px;
-        font-weight:800;
-        letter-spacing:-1.35px;
-        white-space:nowrap;
+        display: inline-flex;
+        align-items: center;
+        color: #fff;
+        font-size: 23px;
+        font-weight: 800;
+        letter-spacing: -1.35px;
+        white-space: nowrap;
       }
 
       .mx-brand img {
-        width:36px;
-        height:36px;
-        object-fit:contain;
-        margin-right:10px;
-        border-radius:0;
-        display:block;
+        width: 36px;
+        height: 36px;
+        object-fit: contain;
+        margin-right: 10px;
+        display: block;
       }
 
-      .mx-brand .mx-brand-cyan,
-      .mx-brand .mx-brand-period {
-        color:#00d4ff;
+      .mx-brand .cyan,
+      .mx-brand .period {
+        color: var(--cyan);
       }
 
-      .mx-brand-subtitle {
-        margin:4px 0 0 46px;
-        color:#707070;
-        font-size:10px;
-        line-height:1.35;
-        letter-spacing:.2px;
-        font-weight:600;
-        text-transform:uppercase;
+      .mx-brand-sub {
+        margin: 5px 0 0 46px;
+        color: #6f6f6f;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .9px;
+        text-transform: uppercase;
       }
 
-      .mx-section {
-        margin:10px 10px 8px;
-        color:#666;
-        font-size:10px;
-        font-weight:800;
-        letter-spacing:1.05px;
-        text-transform:uppercase;
+      .mx-nav-label {
+        margin: 0 10px 8px;
+        color: #5f5f5f;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
       }
 
-      [data-testid="stSidebar"] [data-testid="stRadio"] > label {
-        display:none;
+      /* Sidebar navigation buttons */
+      [data-testid="stSidebar"] .stButton {
+        margin: 0 !important;
       }
 
-      [data-testid="stSidebar"] [role="radiogroup"] {
-        gap:4px;
+      [data-testid="stSidebar"] .stButton > button {
+        width: 100% !important;
+        min-height: 42px !important;
+        justify-content: flex-start !important;
+        padding: 0 12px !important;
+        margin: 0 0 4px !important;
+        border: 0 !important;
+        border-radius: 9px !important;
+        background: transparent !important;
+        color: #bdbdbd !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        box-shadow: none !important;
+        text-align: left !important;
       }
 
-      [data-testid="stSidebar"] [role="radiogroup"] input[type="radio"] {
-        display:none!important;
+      [data-testid="stSidebar"] .stButton > button:hover {
+        background: var(--panel-hover) !important;
+        color: #fff !important;
+        transform: none !important;
       }
 
-      [data-testid="stSidebar"] [role="radiogroup"] label {
-        min-height:42px;
-        padding:0 12px!important;
-        border-radius:9px;
-        color:#b9b9b9!important;
-        background:transparent;
-        transition:background .14s ease,color .14s ease, transform .14s ease;
-      }
-
-      [data-testid="stSidebar"] [role="radiogroup"] label:hover {
-        background:#1c1c1c;
-        color:#fff!important;
-        transform:translateX(2px);
-      }
-
-      [data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) {
-        background:#202020;
-        color:#fff!important;
-        box-shadow:inset 3px 0 0 #00d4ff;
-      }
-
-      [data-testid="stSidebar"] [role="radiogroup"] label p {
-        color:inherit!important;
-        font-size:13px;
-        font-weight:650;
+      [data-testid="stSidebar"] .stButton > button[kind="primary"] {
+        background: #202020 !important;
+        color: #fff !important;
+        box-shadow: inset 3px 0 0 var(--cyan) !important;
       }
 
       [data-testid="stSidebar"] .stLinkButton {
-        margin:22px 4px 0;
-        padding-top:14px;
-        border-top:1px solid #222;
+        margin: 18px 4px 0 !important;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
       }
 
       [data-testid="stSidebar"] .stLinkButton > a {
-        width:100%;
-        justify-content:flex-start;
-        min-height:42px;
-        padding:0 12px;
-        border-radius:9px!important;
-        border:1px solid #252525!important;
-        background:#111!important;
-        color:#c9c9c9!important;
-        font-size:13px;
-        font-weight:650;
+        width: 100%;
+        min-height: 42px;
+        justify-content: flex-start;
+        padding: 0 12px;
+        border-radius: 9px !important;
+        border: 1px solid #262626 !important;
+        background: #111 !important;
+        color: #c8c8c8 !important;
+        font-size: 13px;
+        font-weight: 650;
       }
 
-      [data-testid="stSidebar"] .stLinkButton > a:hover {
-        background:#242424!important;
-        color:#fff!important;
+      .mx-sidebar-foot {
+        margin: 13px 7px 0;
+        color: #585858;
+        font-size: 10px;
+        line-height: 1.5;
       }
 
-      .mx-side-bottom {
-        margin:14px 6px 0;
-        color:#5f5f5f;
-        font-size:10px;
-        line-height:1.55;
-      }
-
-      .mx-live {
-        display:inline-block;
-        width:7px;
-        height:7px;
-        margin-right:6px;
-        border-radius:50%;
-        background:#28c840;
-      }
-
-      /* Main top bar */
+      /* Main */
       .block-container {
         max-width: 980px !important;
-        padding-top: 0 !important;
-        padding-bottom: 8.5rem !important;
         margin: 0 auto !important;
+        padding: 0 24px 9rem !important;
       }
 
       .mx-topbar {
         height: 52px;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        border-bottom:1px solid #242424;
-        margin-bottom:0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+        background: #000;
         position: sticky;
         top: 0;
         z-index: 20;
-        background:#000;
       }
 
       .mx-top-title {
-        color:#dedede;
-        font-size:14px;
-        font-weight:650;
+        color: #d8d8d8;
+        font-size: 14px;
+        font-weight: 650;
       }
 
       .mx-top-actions {
-        display:flex;
-        gap:18px;
-        color:#8e8e8e;
-        font-size:13px;
+        display: flex;
+        gap: 18px;
+        color: #858585;
+        font-size: 13px;
       }
 
-      /* Conversation area */
-      .mx-page-head {
+      .mx-new-chat {
+        max-width: 760px;
+        min-height: calc(100vh - 250px);
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding-bottom: 86px;
+      }
+
+      .mx-new-chat h1 {
+        margin: 0;
+        color: #f1f1f1;
+        font-size: 30px;
+        line-height: 1.15;
+        font-weight: 700;
+        letter-spacing: -1.2px;
+      }
+
+      .mx-new-chat p {
+        max-width: 580px;
+        margin: 11px 0 0;
+        color: #777;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .mx-result-head {
         max-width: 780px;
         margin: 34px auto 18px;
-        padding: 0 2px;
       }
 
-      .mx-eyebrow {
-        color:var(--accent);
-        font-size:11px;
-        font-weight:800;
-        letter-spacing:1px;
-        text-transform:uppercase;
-        margin-bottom:9px;
+      .mx-result-head h1 {
+        margin: 0;
+        color: #f2f2f2;
+        font-size: 28px;
+        font-weight: 720;
+        letter-spacing: -1px;
       }
 
-      .mx-page-title {
-        margin:0;
-        color:#f2f2f2;
-        font-size: 32px;
-        line-height:1.15;
-        letter-spacing:-1.25px;
-        font-weight:750;
-      }
-
-      .mx-page-subtitle {
-        max-width:720px;
-        margin:9px 0 0;
-        color:#929292;
-        font-size:14px;
-        line-height:1.6;
+      .mx-result-head p {
+        margin: 8px 0 0;
+        color: #848484;
+        font-size: 13px;
+        line-height: 1.55;
       }
 
       .mx-result-title {
-        max-width:780px;
-        margin:30px auto 10px;
-        color:#f1f1f1;
-        font-size:19px;
-        font-weight:750;
-        letter-spacing:-.4px;
+        max-width: 780px;
+        margin: 30px auto 10px;
+        color: #f1f1f1;
+        font-size: 19px;
+        font-weight: 750;
+        letter-spacing: -.4px;
       }
 
       [data-testid="stMarkdownContainer"] p,
       [data-testid="stMarkdownContainer"] li {
-        color:#d0d0d0;
+        color: #d0d0d0;
       }
 
-      [data-testid="stAlert"] {
-        max-width:780px;
-        margin-left:auto;
-        margin-right:auto;
-        border-radius:12px;
-        border:1px solid #414141!important;
-        background:#292929!important;
-        color:#e7e7e7!important;
+      [data-testid="stAlert"],
+      [data-testid="stExpander"] {
+        max-width: 780px;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       [data-testid="stExpander"] {
-        max-width:780px;
-        margin-left:auto;
-        margin-right:auto;
-        border:1px solid #414141!important;
-        border-radius:12px!important;
-        overflow:hidden;
-        background:#292929!important;
+        border: 1px solid #3c3c3c !important;
+        border-radius: 12px !important;
+        background: #171717 !important;
       }
 
-      [data-testid="stExpander"] summary,
-      [data-testid="stExpander"] p,
-      [data-testid="stExpander"] span {
-        color:#e7e7e7!important;
-      }
-
-      /* ChatGPT-like responsive bottom composer */
+      /* Responsive composer */
       [data-testid="stBottom"] {
         position: fixed !important;
         left: 300px !important;
@@ -312,8 +290,8 @@ st.markdown(
         bottom: 0 !important;
         width: auto !important;
         z-index: 1000 !important;
-        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 34%, #000 100%) !important;
-        padding: 28px 0 18px !important;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 35%, #000 100%) !important;
+        padding: 24px 0 18px !important;
         border: 0 !important;
       }
 
@@ -328,13 +306,12 @@ st.markdown(
       }
 
       [data-testid="stChatInput"] {
-        position: relative !important;
-        width: min(768px, calc(100vw - 360px)) !important;
+        width: min(760px, calc(100vw - 350px)) !important;
         margin: 0 auto !important;
-        border: 1px solid #3a3a3a !important;
+        border: 1px solid #3b3b3b !important;
         border-radius: 26px !important;
         background: #2f2f2f !important;
-        box-shadow: 0 8px 24px rgba(0,0,0,.28) !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,.3) !important;
         overflow: hidden !important;
       }
 
@@ -345,7 +322,6 @@ st.markdown(
       }
 
       [data-testid="stChatInput"] textarea {
-        width: 100% !important;
         min-height: 58px !important;
         max-height: 200px !important;
         padding: 18px 62px 18px 20px !important;
@@ -355,15 +331,15 @@ st.markdown(
         font-size: 16px !important;
         line-height: 1.45 !important;
         border: 0 !important;
-        outline: none !important;
+        outline: 0 !important;
         box-shadow: none !important;
         resize: none !important;
         overflow-y: auto !important;
       }
 
       [data-testid="stChatInput"] textarea::placeholder {
-        color: #8b8b8b !important;
-        -webkit-text-fill-color: #8b8b8b !important;
+        color: #8a8a8a !important;
+        -webkit-text-fill-color: #8a8a8a !important;
         opacity: 1 !important;
       }
 
@@ -375,66 +351,58 @@ st.markdown(
         height: 36px !important;
         min-width: 36px !important;
         min-height: 36px !important;
-        margin: 0 !important;
-        padding: 0 !important;
         border: 0 !important;
         border-radius: 50% !important;
         color: #fff !important;
-        background: #0a84ff !important;
-        box-shadow: none !important;
-      }
-
-      [data-testid="stChatInput"] button:hover {
-        background: #2994ff !important;
+        background: var(--blue) !important;
       }
 
       .mx-about-grid {
-        display:grid;
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:14px;
-        max-width:780px;
-        margin:22px auto 0;
+        display: grid;
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        gap: 14px;
+        max-width: 780px;
+        margin: 28px auto 0;
       }
 
       .mx-about-card {
-        padding:19px;
-        border:1px solid #3f3f3f;
-        border-radius:14px;
-        background:#292929;
+        padding: 20px;
+        border: 1px solid #2f2f2f;
+        border-radius: 14px;
+        background: #111;
       }
 
       .mx-about-card strong {
-        display:block;
-        color:#f2f2f2;
-        margin-bottom:7px;
+        display: block;
+        color: #f2f2f2;
+        margin-bottom: 7px;
       }
 
       .mx-about-card span {
-        color:#999;
-        font-size:13px;
-        line-height:1.55;
+        color: #8d8d8d;
+        font-size: 13px;
+        line-height: 1.55;
       }
 
-      @media (max-width:760px) {
+      @media (max-width: 760px) {
         [data-testid="stSidebar"] {
-          display:none;
+          display: none;
         }
 
         [data-testid="stBottom"] {
-          left:0!important;
+          left: 0 !important;
         }
 
         [data-testid="stChatInput"] {
           width: calc(100vw - 24px) !important;
-          max-width: calc(100vw - 24px) !important;
         }
 
         .block-container {
-          padding:0 1rem 10rem;
+          padding: 0 14px 8rem !important;
         }
 
         .mx-about-grid {
-          grid-template-columns:1fr;
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -519,8 +487,8 @@ def render_result(tool, result):
                 st.write(f"**Priority:** {test_case.get('priority', '')}")
                 st.write(f"**Preconditions:** {test_case.get('preconditions', '')}")
                 st.write("**Steps:**")
-
                 steps = test_case.get("steps", [])
+
                 if isinstance(steps, list):
                     for index, step in enumerate(steps, 1):
                         st.write(f"{index}. {step}")
@@ -562,102 +530,106 @@ def render_result(tool, result):
 
 TOOLS = {
     "Requirements": {
-        "tool":"requirements_analyzer",
-        "title":"Requirements Analyzer",
-        "description":"Turn raw requirements into structured functional coverage, risks, acceptance criteria, and test scenarios.",
-        "placeholder":"Message Requirements Analyzer",
+        "tool": "requirements_analyzer",
+        "title": "Requirements Analyzer",
+        "description": "Turn raw requirements into functional coverage, risks, acceptance criteria, and test scenarios.",
+        "placeholder": "Message Requirements Analyzer",
     },
     "Test Cases": {
-        "tool":"test_case_generator",
-        "title":"Test Case Generator",
-        "description":"Generate structured functional, negative, and edge test cases from a feature or requirement.",
-        "placeholder":"Message Test Case Generator",
+        "tool": "test_case_generator",
+        "title": "Test Case Generator",
+        "description": "Generate functional, negative, and edge test cases from a feature or requirement.",
+        "placeholder": "Message Test Case Generator",
     },
     "API Tests": {
-        "tool":"api_test_generator",
-        "title":"API Test Generator",
-        "description":"Generate positive, negative, validation, security, and example API tests from an endpoint description.",
-        "placeholder":"Message API Test Generator",
+        "tool": "api_test_generator",
+        "title": "API Test Generator",
+        "description": "Generate positive, negative, validation, security, and example API tests.",
+        "placeholder": "Message API Test Generator",
     },
     "Summarizer": {
-        "tool":"document_summarizer",
-        "title":"Document Summarizer",
-        "description":"Condense technical or business text into decisions, key points, actions, and open questions.",
-        "placeholder":"Message Document Summarizer",
+        "tool": "document_summarizer",
+        "title": "Document Summarizer",
+        "description": "Condense technical or business text into decisions, key points, actions, and open questions.",
+        "placeholder": "Message Document Summarizer",
     },
     "QA Assistant": {
-        "tool":"qa_assistant",
-        "title":"QA Assistant",
-        "description":"Get practical help with QA strategy, defects, automation, testing decisions, and quality engineering problems.",
-        "placeholder":"Message QA Assistant",
+        "tool": "qa_assistant",
+        "title": "QA Assistant",
+        "description": "Get practical help with QA strategy, defects, automation, and quality engineering decisions.",
+        "placeholder": "Message QA Assistant",
     },
 }
 
+if "page" not in st.session_state:
+    st.session_state.page = "Requirements"
 
 with st.sidebar:
     st.markdown(
         """
-        <div class="mx-side-top">
-          <div>
-            <div class="mx-brand">
-              <img src="https://myaiteam-company.vercel.app/images/mapranex-logo.webp" alt="Mapranex logo">
-              <span>Mapra</span><span class="mx-brand-cyan">nex</span><span class="mx-brand-period">.</span>
-            </div>
-            <div class="mx-brand-subtitle">AI Tools</div>
+        <div class="mx-brand-wrap">
+          <div class="mx-brand">
+            <img src="https://myaiteam-company.vercel.app/images/mapranex-logo.webp" alt="Mapranex logo">
+            <span>Mapra</span><span class="cyan">nex</span><span class="period">.</span>
           </div>
+          <div class="mx-brand-sub">AI Tools</div>
         </div>
-        <div class="mx-section">AI Tools</div>
+        <div class="mx-nav-label">Tools</div>
         """,
         unsafe_allow_html=True,
     )
 
-    page = st.radio(
-        "Navigation",
-        ["◇  Requirements", "✓  Test Cases", "↗  API Tests", "≡  Summarizer", "✦  QA Assistant", "ⓘ  About"],
-        label_visibility="collapsed",
-    )
+    for label in ["Requirements", "Test Cases", "API Tests", "Summarizer", "QA Assistant"]:
+        active = st.session_state.page == label
+        if st.button(
+            label,
+            key=f"nav_{label}",
+            type="primary" if active else "secondary",
+            use_container_width=True,
+        ):
+            st.session_state.page = label
+            st.rerun()
+
+    st.markdown('<div class="mx-nav-label" style="margin-top:18px;">More</div>', unsafe_allow_html=True)
+
+    if st.button(
+        "About",
+        key="nav_about",
+        type="primary" if st.session_state.page == "About" else "secondary",
+        use_container_width=True,
+    ):
+        st.session_state.page = "About"
+        st.rerun()
 
     st.link_button("↗  Main website", "https://myaiteam-company.vercel.app/")
 
     st.markdown(
         """
-        <div class="mx-side-bottom">
-          <div><span class="mx-live"></span>Services connected</div>
-          <div style="margin-top:6px;">n8n · OmniRoute · Oracle Cloud</div>
+        <div class="mx-sidebar-foot">
+          n8n · OmniRoute · Oracle Cloud
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-page = (
-    page.replace("◇  ", "")
-        .replace("✓  ", "")
-        .replace("↗  ", "")
-        .replace("≡  ", "")
-        .replace("✦  ", "")
-        .replace("ⓘ  ", "")
-)
-
+page = st.session_state.page
 
 st.markdown(
     f"""
     <div class="mx-topbar">
-      <div class="mx-top-title">{page if page != "About" else "About Mapranex."} ▾</div>
+      <div class="mx-top-title">{page}</div>
       <div class="mx-top-actions"><span>Share</span><span>•••</span></div>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
-
 if page == "About":
     st.markdown(
         """
-        <div class="mx-page-head">
-          <div class="mx-page-title">Built for focused AI-assisted quality work.</div>
-          <p class="mx-page-subtitle">
-            Mapranex. AI Tools keeps the interface simple while n8n and OmniRoute handle secure orchestration behind the scenes.
-          </p>
+        <div class="mx-result-head">
+          <h1>About Mapranex. AI Tools</h1>
+          <p>Focused AI-assisted quality engineering tools backed by n8n and OmniRoute.</p>
         </div>
         <div class="mx-about-grid">
           <div class="mx-about-card">
@@ -676,24 +648,36 @@ else:
     config = TOOLS[page]
     result_key = f'{config["tool"]}_result'
 
-    st.markdown(
-        f"""
-        <div class="mx-page-head">
-          <div class="mx-eyebrow">Mapranex. AI Tools</div>
-          <div class="mx-page-title">{config["title"]}</div>
-          <p class="mx-page-subtitle">{config["description"]}</p>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
     if result_key in st.session_state:
+        st.markdown(
+            f"""
+            <div class="mx-result-head">
+              <h1>{config["title"]}</h1>
+              <p>{config["description"]}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
         data = st.session_state[result_key]
+
         if data and data.get("status") == "success":
             render_result(config["tool"], data.get("result") or {})
+
             with st.expander("Technical response details"):
                 st.caption(f'Request ID: {data.get("request_id", "")}')
                 st.json(data)
+    else:
+        st.markdown(
+            f"""
+            <div class="mx-new-chat">
+              <h1>{config["title"]}</h1>
+              <p>{config["description"]}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
     prompt = st.chat_input(config["placeholder"])
 
     if prompt:
