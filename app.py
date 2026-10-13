@@ -15,15 +15,15 @@ st.markdown(
     """
     <style>
       :root {
-        --bg:#212121;
-        --sidebar:#171717;
+        --bg:#000000;
+        --sidebar:#050505;
         --panel:#2f2f2f;
-        --panel-2:#252525;
+        --panel-2:#1f1f1f;
         --panel-3:#303030;
-        --line:#3b3b3b;
+        --line:#2b2b2b;
         --text:#ececec;
         --muted:#9b9b9b;
-        --accent:#00d4ff;
+        --accent:#0a84ff;
       }
 
       html, body, [class*="css"] {
@@ -31,7 +31,7 @@ st.markdown(
       }
 
       html, body, .stApp, [data-testid="stAppViewContainer"] {
-        background:var(--bg)!important;
+        background:#000!important;
         color:var(--text)!important;
       }
 
@@ -57,13 +57,13 @@ st.markdown(
       /* Sidebar */
       [data-testid="stSidebar"] {
         background:var(--sidebar)!important;
-        border-right:1px solid #292929;
-        width:308px!important;
-        min-width:308px!important;
+        border-right:1px solid #242424;
+        width:300px!important;
+        min-width:300px!important;
       }
 
       [data-testid="stSidebar"] > div:first-child {
-        padding:12px 10px 18px;
+        padding:10px 8px 18px;
       }
 
       .mx-side-top {
@@ -145,7 +145,7 @@ st.markdown(
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) {
-        background:#2a2a2a;
+        background:#202020;
         color:#fff!important;
       }
 
@@ -197,24 +197,24 @@ st.markdown(
 
       /* Main top bar */
       .block-container {
-        max-width:1040px;
+        max-width:780px;
         padding-top:0;
         padding-bottom:11rem;
       }
 
       .mx-topbar {
-        height:56px;
+        height:44px;
         display:flex;
         align-items:center;
         justify-content:space-between;
-        border-bottom:1px solid #292929;
+        border-bottom:1px solid #242424;
         margin-bottom:0;
       }
 
       .mx-top-title {
         color:#dedede;
         font-size:14px;
-        font-weight:700;
+        font-weight:650;
       }
 
       .mx-top-actions {
@@ -226,8 +226,8 @@ st.markdown(
 
       /* Conversation area */
       .mx-page-head {
-        max-width:760px;
-        margin:44px auto 26px;
+        max-width:780px;
+        margin:26px auto 18px;
       }
 
       .mx-eyebrow {
@@ -249,7 +249,7 @@ st.markdown(
       }
 
       .mx-page-subtitle {
-        max-width:650px;
+        max-width:720px;
         margin:9px 0 0;
         color:#929292;
         font-size:14px;
@@ -257,19 +257,19 @@ st.markdown(
       }
 
       .mx-empty {
-        max-width:760px;
-        min-height:390px;
+        max-width:780px;
+        min-height:360px;
         margin:0 auto;
         display:flex;
         align-items:center;
         justify-content:center;
-        color:#676767;
+        color:#707070;
         text-align:center;
         font-size:13px;
       }
 
       .mx-result-title {
-        max-width:760px;
+        max-width:780px;
         margin:30px auto 10px;
         color:#f1f1f1;
         font-size:19px;
@@ -283,7 +283,7 @@ st.markdown(
       }
 
       [data-testid="stAlert"] {
-        max-width:760px;
+        max-width:780px;
         margin-left:auto;
         margin-right:auto;
         border-radius:12px;
@@ -293,7 +293,7 @@ st.markdown(
       }
 
       [data-testid="stExpander"] {
-        max-width:760px;
+        max-width:780px;
         margin-left:auto;
         margin-right:auto;
         border:1px solid #414141!important;
@@ -310,17 +310,17 @@ st.markdown(
 
       /* ChatGPT-style bottom composer */
       [data-testid="stBottom"] {
-        left:308px!important;
+        left:300px!important;
         right:0!important;
         width:auto!important;
-        background:linear-gradient(180deg,rgba(33,33,33,0) 0%,#212121 28%,#212121 100%)!important;
-        padding:34px 0 22px!important;
+        background:linear-gradient(180deg,rgba(0,0,0,0) 0%,#000 28%,#000 100%)!important;
+        padding:20px 0 18px!important;
       }
 
       [data-testid="stBottom"] > div,
       [data-testid="stBottomBlockContainer"] {
         max-width:780px!important;
-        width:calc(100% - 36px)!important;
+        width:calc(100% - 32px)!important;
         margin:0 auto!important;
         padding:0!important;
         background:transparent!important;
@@ -328,19 +328,20 @@ st.markdown(
 
       [data-testid="stChatInput"] {
         border:1px solid #404040!important;
-        border-radius:26px!important;
+        border-radius:28px!important;
         background:#2f2f2f!important;
-        box-shadow:0 14px 40px rgba(0,0,0,.23)!important;
+        box-shadow:0 8px 32px rgba(0,0,0,.38)!important;
         overflow:hidden;
       }
 
       [data-testid="stChatInput"] textarea {
         color:#f1f1f1!important;
         background:transparent!important;
-        min-height:64px!important;
-        max-height:190px!important;
-        padding:19px 58px 19px 20px!important;
-        line-height:1.45!important;
+        min-height:230px!important;
+        max-height:230px!important;
+        padding:22px 72px 28px 20px!important;
+        font-size:16px!important;
+        line-height:1.5!important;
       }
 
       [data-testid="stChatInput"] textarea::placeholder {
@@ -348,14 +349,15 @@ st.markdown(
       }
 
       [data-testid="stChatInput"] button {
-        width:34px!important;
-        height:34px!important;
-        min-height:34px!important;
-        margin-right:10px!important;
+        width:38px!important;
+        height:38px!important;
+        min-height:38px!important;
+        margin-right:14px!important;
+        margin-bottom:14px!important;
         border:0!important;
         border-radius:50%!important;
         color:#071c32!important;
-        background:var(--accent)!important;
+        background:#0a84ff!important;
       }
 
       /* Remove the white host strip around the bottom composer */
@@ -369,7 +371,7 @@ st.markdown(
         display:grid;
         grid-template-columns:repeat(2,minmax(0,1fr));
         gap:14px;
-        max-width:760px;
+        max-width:780px;
         margin:22px auto 0;
       }
 
