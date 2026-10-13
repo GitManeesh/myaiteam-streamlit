@@ -5,7 +5,7 @@ import requests
 import streamlit as st
 
 st.set_page_config(
-    page_title="Mapranex AI",
+    page_title="Mapranex. | AI Tools",
     page_icon="✦",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -74,23 +74,36 @@ st.markdown(
       }
 
       .mx-brand {
-        display:flex;
+        display:inline-flex;
         align-items:center;
-        gap:10px;
-        color:#f3f3f3;
-        font-size:17px;
+        color:#fff;
+        font-size:25px;
         font-weight:800;
-        letter-spacing:-.35px;
+        letter-spacing:-1.5px;
+        white-space:nowrap;
       }
 
-      .mx-brand-mark {
-        width:28px;
-        height:28px;
-        border-radius:9px;
-        display:grid;
-        place-items:center;
-        color:#071c32;
-        background:linear-gradient(135deg,#00d4ff,#7c5cff);
+      .mx-brand img {
+        width:32px;
+        height:32px;
+        object-fit:contain;
+        margin-right:11px;
+        border-radius:0;
+        display:block;
+      }
+
+      .mx-brand .mx-brand-cyan,
+      .mx-brand .mx-brand-period {
+        color:#00d4ff;
+      }
+
+      .mx-brand-subtitle {
+        margin:6px 0 0 43px;
+        color:#747474;
+        font-size:11px;
+        line-height:1.35;
+        letter-spacing:0;
+        font-weight:500;
       }
 
       .mx-side-icon {
@@ -610,9 +623,12 @@ with st.sidebar:
     st.markdown(
         """
         <div class="mx-side-top">
-          <div class="mx-brand">
-            <span class="mx-brand-mark">✦</span>
-            <span>Mapranex AI</span>
+          <div>
+            <div class="mx-brand">
+              <img src="https://myaiteam-company.vercel.app/images/mapranex-logo.webp" alt="Mapranex logo">
+              <span>Mapra</span><span class="mx-brand-cyan">nex</span><span class="mx-brand-period">.</span>
+            </div>
+            <div class="mx-brand-subtitle">AI Tools</div>
           </div>
           <span class="mx-side-icon">⌕</span>
         </div>
@@ -644,7 +660,7 @@ with st.sidebar:
 st.markdown(
     f"""
     <div class="mx-topbar">
-      <div class="mx-top-title">{page if page != "About" else "About Mapranex AI"} ▾</div>
+      <div class="mx-top-title">{page if page != "About" else "About Mapranex."} ▾</div>
       <div class="mx-top-actions"><span>Share</span><span>•••</span></div>
     </div>
     """,
@@ -658,7 +674,7 @@ if page == "About":
         <div class="mx-page-head">
           <div class="mx-page-title">Built for focused AI-assisted quality work.</div>
           <p class="mx-page-subtitle">
-            Mapranex AI keeps the interface simple while n8n and OmniRoute handle secure orchestration behind the scenes.
+            Mapranex. AI Tools keeps the interface simple while n8n and OmniRoute handle secure orchestration behind the scenes.
           </p>
         </div>
         <div class="mx-about-grid">
@@ -681,7 +697,7 @@ else:
     st.markdown(
         f"""
         <div class="mx-page-head">
-          <div class="mx-eyebrow">Mapranex AI Tool</div>
+          <div class="mx-eyebrow">Mapranex. AI Tools</div>
           <div class="mx-page-title">{config["title"]}</div>
           <p class="mx-page-subtitle">{config["description"]}</p>
         </div>
@@ -708,7 +724,7 @@ else:
         if len(prompt.strip()) < 20:
             st.warning("Enter at least 20 characters.")
         else:
-            with st.spinner("Processing with Mapranex AI..."):
+            with st.spinner("Processing with Mapranex. AI Tools..."):
                 data = call_suite(config["tool"], prompt)
 
             if data and data.get("status") == "success":
