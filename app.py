@@ -15,14 +15,15 @@ st.markdown(
     """
     <style>
       :root {
-        --bg: #212121;
-        --sidebar: #171717;
-        --panel: #2f2f2f;
-        --panel-2: #282828;
-        --line: #3d3d3d;
-        --text: #ececec;
-        --muted: #9b9b9b;
-        --accent: #00d4ff;
+        --bg:#212121;
+        --sidebar:#171717;
+        --panel:#2f2f2f;
+        --panel-2:#252525;
+        --panel-3:#303030;
+        --line:#3b3b3b;
+        --text:#ececec;
+        --muted:#9b9b9b;
+        --accent:#00d4ff;
       }
 
       html, body, [class*="css"] {
@@ -30,311 +31,382 @@ st.markdown(
       }
 
       html, body, .stApp, [data-testid="stAppViewContainer"] {
-        background: var(--bg) !important;
-        color: var(--text) !important;
+        background:var(--bg)!important;
+        color:var(--text)!important;
       }
 
-      /* Hide Streamlit chrome for end users */
+      /* Hide Streamlit's in-app chrome where possible */
       #MainMenu,
       footer,
       [data-testid="stToolbar"],
       [data-testid="stDecoration"],
       [data-testid="stStatusWidget"],
       [data-testid="stHeaderActionElements"],
-      [data-testid="stSidebarCollapsedControl"] {
-        display: none !important;
-        visibility: hidden !important;
+      [data-testid="stSidebarCollapsedControl"],
+      [data-testid="stAppDeployButton"] {
+        display:none!important;
+        visibility:hidden!important;
       }
 
       [data-testid="stHeader"] {
-        background: transparent !important;
-        height: 0 !important;
-        min-height: 0 !important;
+        background:transparent!important;
+        height:0!important;
+        min-height:0!important;
       }
 
-      /* Permanent left sidebar */
+      /* Sidebar */
       [data-testid="stSidebar"] {
-        background: var(--sidebar) !important;
-        border-right: 1px solid #2b2b2b;
-        width: 268px !important;
-        min-width: 268px !important;
+        background:var(--sidebar)!important;
+        border-right:1px solid #292929;
+        width:308px!important;
+        min-width:308px!important;
       }
 
       [data-testid="stSidebar"] > div:first-child {
-        padding-top: 18px;
+        padding:12px 10px 18px;
       }
 
-      .mx-sidebar-brand {
-        padding: 4px 8px 18px;
+      .mx-side-top {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        padding:4px 5px 14px;
       }
 
-      .mx-sidebar-logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: #f3f3f3;
-        font-size: 17px;
-        font-weight: 800;
-        letter-spacing: -.35px;
+      .mx-brand {
+        display:flex;
+        align-items:center;
+        gap:10px;
+        color:#f3f3f3;
+        font-size:17px;
+        font-weight:800;
+        letter-spacing:-.35px;
       }
 
-      .mx-sidebar-mark {
-        width: 30px;
-        height: 30px;
-        border-radius: 9px;
-        display: grid;
-        place-items: center;
-        color: #071c32;
-        background: linear-gradient(135deg, #00d4ff, #7c5cff);
-        box-shadow: 0 5px 18px rgba(0,212,255,.14);
+      .mx-brand-mark {
+        width:28px;
+        height:28px;
+        border-radius:9px;
+        display:grid;
+        place-items:center;
+        color:#071c32;
+        background:linear-gradient(135deg,#00d4ff,#7c5cff);
       }
 
-      .mx-sidebar-copy {
-        margin-top: 7px;
-        color: #747474;
-        font-size: 11px;
-        line-height: 1.45;
+      .mx-side-icon {
+        color:#8d8d8d;
+        font-size:17px;
       }
 
-      .mx-sidebar-label {
-        margin: 13px 10px 7px;
-        color: #606060;
-        font-size: 10px;
-        font-weight: 800;
-        letter-spacing: 1px;
-        text-transform: uppercase;
+      .mx-new {
+        margin:0 2px 14px;
+        padding:11px 12px;
+        border-radius:9px;
+        background:#202020;
+        border:1px solid #2f2f2f;
+        color:#dcdcdc;
+        font-size:13px;
+        font-weight:650;
+      }
+
+      .mx-section {
+        margin:14px 10px 7px;
+        color:#666;
+        font-size:10px;
+        font-weight:800;
+        letter-spacing:1px;
+        text-transform:uppercase;
       }
 
       [data-testid="stSidebar"] [data-testid="stRadio"] > label {
-        display: none;
+        display:none;
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] {
-        gap: 4px;
+        gap:3px;
+      }
+
+      [data-testid="stSidebar"] [role="radiogroup"] input[type="radio"] {
+        display:none!important;
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] label {
-        min-height: 42px;
-        padding: 0 11px !important;
-        border-radius: 9px;
-        background: transparent;
-        color: #bdbdbd !important;
-        transition: background .14s ease, color .14s ease;
+        min-height:40px;
+        padding:0 11px!important;
+        border-radius:8px;
+        color:#bdbdbd!important;
+        background:transparent;
+        transition:background .14s ease,color .14s ease;
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] label:hover {
-        background: #242424;
-        color: #fff !important;
+        background:#242424;
+        color:#fff!important;
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) {
-        background: #2b2b2b;
-        color: #fff !important;
+        background:#2a2a2a;
+        color:#fff!important;
       }
 
       [data-testid="stSidebar"] [role="radiogroup"] label p {
-        color: inherit !important;
-        font-size: 13px;
-        font-weight: 650;
+        color:inherit!important;
+        font-size:13px;
+        font-weight:600;
       }
 
       [data-testid="stSidebar"] .stLinkButton {
-        margin: 14px 8px 0;
+        margin:16px 2px 0;
       }
 
       [data-testid="stSidebar"] .stLinkButton > a {
-        width: 100%;
-        justify-content: flex-start;
-        min-height: 40px;
-        padding: 0 12px;
-        border-radius: 9px !important;
-        border: 1px solid #313131 !important;
-        background: #202020 !important;
-        color: #c9c9c9 !important;
-        font-size: 12px;
-        font-weight: 700;
+        width:100%;
+        justify-content:flex-start;
+        min-height:40px;
+        padding:0 12px;
+        border-radius:8px!important;
+        border:0!important;
+        background:transparent!important;
+        color:#bdbdbd!important;
+        font-size:13px;
+        font-weight:600;
       }
 
-      .mx-sidebar-footer {
-        margin: 24px 8px 0;
-        padding-top: 15px;
-        border-top: 1px solid #292929;
-        color: #666;
-        font-size: 10px;
-        line-height: 1.55;
+      [data-testid="stSidebar"] .stLinkButton > a:hover {
+        background:#242424!important;
+        color:#fff!important;
       }
 
-      .mx-live-dot {
-        display: inline-block;
-        width: 7px;
-        height: 7px;
-        margin-right: 6px;
-        border-radius: 50%;
-        background: #28c840;
-        box-shadow: 0 0 8px rgba(40,200,64,.42);
+      .mx-side-bottom {
+        margin:26px 4px 0;
+        padding-top:14px;
+        border-top:1px solid #292929;
+        color:#666;
+        font-size:10px;
+        line-height:1.55;
       }
 
-      /* Main canvas */
+      .mx-live {
+        display:inline-block;
+        width:7px;
+        height:7px;
+        margin-right:6px;
+        border-radius:50%;
+        background:#28c840;
+      }
+
+      /* Main top bar */
       .block-container {
-        max-width: 920px;
-        padding-top: 3.2rem;
-        padding-bottom: 9rem;
+        max-width:1040px;
+        padding-top:0;
+        padding-bottom:11rem;
       }
 
+      .mx-topbar {
+        height:56px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        border-bottom:1px solid #292929;
+        margin-bottom:0;
+      }
+
+      .mx-top-title {
+        color:#dedede;
+        font-size:14px;
+        font-weight:700;
+      }
+
+      .mx-top-actions {
+        display:flex;
+        gap:18px;
+        color:#8e8e8e;
+        font-size:13px;
+      }
+
+      /* Conversation area */
       .mx-page-head {
-        max-width: 760px;
-        margin: 0 auto 24px;
+        max-width:760px;
+        margin:44px auto 26px;
       }
 
       .mx-eyebrow {
-        color: var(--accent);
-        font-size: 11px;
-        font-weight: 800;
-        letter-spacing: 1.05px;
-        text-transform: uppercase;
-        margin-bottom: 10px;
+        color:var(--accent);
+        font-size:11px;
+        font-weight:800;
+        letter-spacing:1px;
+        text-transform:uppercase;
+        margin-bottom:9px;
       }
 
       .mx-page-title {
-        color: #f4f4f4;
-        font-size: clamp(31px, 4vw, 43px);
-        line-height: 1.08;
-        letter-spacing: -1.9px;
-        font-weight: 800;
-        margin: 0;
+        margin:0;
+        color:#f2f2f2;
+        font-size:28px;
+        line-height:1.15;
+        letter-spacing:-1.1px;
+        font-weight:750;
       }
 
       .mx-page-subtitle {
-        margin: 11px 0 0;
-        color: #969696;
-        font-size: 14px;
-        line-height: 1.65;
-        max-width: 680px;
+        max-width:650px;
+        margin:9px 0 0;
+        color:#929292;
+        font-size:14px;
+        line-height:1.6;
       }
 
       .mx-empty {
-        max-width: 760px;
-        margin: 54px auto 0;
-        padding: 24px 0;
-        color: #717171;
-        text-align: center;
-        font-size: 13px;
+        max-width:760px;
+        min-height:390px;
+        margin:0 auto;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        color:#676767;
+        text-align:center;
+        font-size:13px;
       }
 
       .mx-result-title {
-        max-width: 760px;
-        margin: 30px auto 10px;
-        color: #f1f1f1;
-        font-size: 19px;
-        font-weight: 800;
-        letter-spacing: -.45px;
+        max-width:760px;
+        margin:30px auto 10px;
+        color:#f1f1f1;
+        font-size:19px;
+        font-weight:750;
+        letter-spacing:-.4px;
       }
 
       [data-testid="stMarkdownContainer"] p,
       [data-testid="stMarkdownContainer"] li {
-        color: #d0d0d0;
+        color:#d0d0d0;
       }
 
       [data-testid="stAlert"] {
-        max-width: 760px;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 14px;
-        border: 1px solid #414141 !important;
-        background: #292929 !important;
-        color: #e7e7e7 !important;
+        max-width:760px;
+        margin-left:auto;
+        margin-right:auto;
+        border-radius:12px;
+        border:1px solid #414141!important;
+        background:#292929!important;
+        color:#e7e7e7!important;
       }
 
       [data-testid="stExpander"] {
-        max-width: 760px;
-        margin-left: auto;
-        margin-right: auto;
-        border: 1px solid #414141 !important;
-        border-radius: 14px !important;
-        overflow: hidden;
-        background: #292929 !important;
+        max-width:760px;
+        margin-left:auto;
+        margin-right:auto;
+        border:1px solid #414141!important;
+        border-radius:12px!important;
+        overflow:hidden;
+        background:#292929!important;
       }
 
       [data-testid="stExpander"] summary,
       [data-testid="stExpander"] p,
       [data-testid="stExpander"] span {
-        color: #e7e7e7 !important;
+        color:#e7e7e7!important;
       }
 
-      /* ChatGPT-like bottom composer */
+      /* ChatGPT-style bottom composer */
       [data-testid="stBottom"] {
-        background: linear-gradient(180deg, rgba(33,33,33,0), #212121 28%, #212121 100%) !important;
-        padding-top: 22px !important;
+        left:308px!important;
+        right:0!important;
+        width:auto!important;
+        background:linear-gradient(180deg,rgba(33,33,33,0) 0%,#212121 28%,#212121 100%)!important;
+        padding:34px 0 22px!important;
       }
 
-      [data-testid="stBottom"] > div {
-        max-width: 760px;
-        margin: 0 auto;
+      [data-testid="stBottom"] > div,
+      [data-testid="stBottomBlockContainer"] {
+        max-width:780px!important;
+        width:calc(100% - 36px)!important;
+        margin:0 auto!important;
+        padding:0!important;
+        background:transparent!important;
       }
 
       [data-testid="stChatInput"] {
-        border: 1px solid #444 !important;
-        border-radius: 24px !important;
-        background: #2f2f2f !important;
-        box-shadow: 0 12px 35px rgba(0,0,0,.22) !important;
+        border:1px solid #404040!important;
+        border-radius:26px!important;
+        background:#2f2f2f!important;
+        box-shadow:0 14px 40px rgba(0,0,0,.23)!important;
+        overflow:hidden;
       }
 
       [data-testid="stChatInput"] textarea {
-        color: #f0f0f0 !important;
-        background: transparent !important;
-        min-height: 54px !important;
-        max-height: 180px !important;
-        padding: 16px 52px 16px 18px !important;
+        color:#f1f1f1!important;
+        background:transparent!important;
+        min-height:64px!important;
+        max-height:190px!important;
+        padding:19px 58px 19px 20px!important;
+        line-height:1.45!important;
       }
 
       [data-testid="stChatInput"] textarea::placeholder {
-        color: #7e7e7e !important;
+        color:#868686!important;
       }
 
       [data-testid="stChatInput"] button {
-        color: #071c32 !important;
-        background: var(--accent) !important;
-        border-radius: 50% !important;
+        width:34px!important;
+        height:34px!important;
+        min-height:34px!important;
+        margin-right:10px!important;
+        border:0!important;
+        border-radius:50%!important;
+        color:#071c32!important;
+        background:var(--accent)!important;
+      }
+
+      /* Remove the white host strip around the bottom composer */
+      [data-testid="stBottom"],
+      [data-testid="stBottom"] *,
+      [data-testid="stBottomBlockContainer"] {
+        border-top-color:transparent!important;
       }
 
       .mx-about-grid {
-        display: grid;
-        grid-template-columns: repeat(2,minmax(0,1fr));
-        gap: 14px;
-        max-width: 760px;
-        margin: 12px auto 0;
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:14px;
+        max-width:760px;
+        margin:22px auto 0;
       }
 
       .mx-about-card {
-        padding: 19px;
-        border: 1px solid #3f3f3f;
-        border-radius: 16px;
-        background: #292929;
+        padding:19px;
+        border:1px solid #3f3f3f;
+        border-radius:14px;
+        background:#292929;
       }
 
       .mx-about-card strong {
-        display: block;
-        color: #f2f2f2;
-        margin-bottom: 7px;
+        display:block;
+        color:#f2f2f2;
+        margin-bottom:7px;
       }
 
       .mx-about-card span {
-        color: #999;
-        font-size: 13px;
-        line-height: 1.55;
+        color:#999;
+        font-size:13px;
+        line-height:1.55;
       }
 
-      @media (max-width: 760px) {
+      @media (max-width:760px) {
         [data-testid="stSidebar"] {
-          display: none;
+          display:none;
+        }
+
+        [data-testid="stBottom"] {
+          left:0!important;
         }
 
         .block-container {
-          padding: 1.5rem 1rem 8rem;
+          padding:0 1rem 10rem;
         }
 
         .mx-about-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns:1fr;
         }
       }
     </style>
@@ -419,8 +491,8 @@ def render_result(tool, result):
                 st.write(f"**Priority:** {test_case.get('priority', '')}")
                 st.write(f"**Preconditions:** {test_case.get('preconditions', '')}")
                 st.write("**Steps:**")
-                steps = test_case.get("steps", [])
 
+                steps = test_case.get("steps", [])
                 if isinstance(steps, list):
                     for index, step in enumerate(steps, 1):
                         st.write(f"{index}. {step}")
@@ -461,40 +533,35 @@ def render_result(tool, result):
 
 
 TOOLS = {
-    "◇  Requirements": {
-        "tool": "requirements_analyzer",
-        "eyebrow": "Requirements",
-        "title": "Requirements Analyzer",
-        "description": "Turn raw requirements into structured functional coverage, risks, acceptance criteria, and test scenarios.",
-        "placeholder": "Paste a requirement, user story, feature description, or business need...",
+    "Requirements": {
+        "tool":"requirements_analyzer",
+        "title":"Requirements Analyzer",
+        "description":"Turn raw requirements into structured functional coverage, risks, acceptance criteria, and test scenarios.",
+        "placeholder":"Message Requirements Analyzer",
     },
-    "✓  Test Cases": {
-        "tool": "test_case_generator",
-        "eyebrow": "Test design",
-        "title": "Test Case Generator",
-        "description": "Generate structured functional, negative, and edge test cases from a feature or requirement.",
-        "placeholder": "Paste the requirement or feature you want test cases for...",
+    "Test Cases": {
+        "tool":"test_case_generator",
+        "title":"Test Case Generator",
+        "description":"Generate structured functional, negative, and edge test cases from a feature or requirement.",
+        "placeholder":"Message Test Case Generator",
     },
-    "↗  API Tests": {
-        "tool": "api_test_generator",
-        "eyebrow": "API quality",
-        "title": "API Test Generator",
-        "description": "Generate positive, negative, validation, security, and example API tests from an endpoint description.",
-        "placeholder": "Paste an API endpoint description, request/response contract, or OpenAPI excerpt...",
+    "API Tests": {
+        "tool":"api_test_generator",
+        "title":"API Test Generator",
+        "description":"Generate positive, negative, validation, security, and example API tests from an endpoint description.",
+        "placeholder":"Message API Test Generator",
     },
-    "≡  Summarizer": {
-        "tool": "document_summarizer",
-        "eyebrow": "Knowledge",
-        "title": "Document Summarizer",
-        "description": "Condense technical or business text into decisions, key points, actions, and open questions.",
-        "placeholder": "Paste document text, meeting notes, technical notes, or business content...",
+    "Summarizer": {
+        "tool":"document_summarizer",
+        "title":"Document Summarizer",
+        "description":"Condense technical or business text into decisions, key points, actions, and open questions.",
+        "placeholder":"Message Document Summarizer",
     },
-    "✦  QA Assistant": {
-        "tool": "qa_assistant",
-        "eyebrow": "Quality engineering",
-        "title": "QA Assistant",
-        "description": "Get practical help with QA strategy, defects, automation, testing decisions, and quality engineering problems.",
-        "placeholder": "Describe your QA question, defect, automation problem, or testing context...",
+    "QA Assistant": {
+        "tool":"qa_assistant",
+        "title":"QA Assistant",
+        "description":"Get practical help with QA strategy, defects, automation, testing decisions, and quality engineering problems.",
+        "placeholder":"Message QA Assistant",
     },
 }
 
@@ -502,30 +569,31 @@ TOOLS = {
 with st.sidebar:
     st.markdown(
         """
-        <div class="mx-sidebar-brand">
-          <div class="mx-sidebar-logo">
-            <span class="mx-sidebar-mark">✦</span>
+        <div class="mx-side-top">
+          <div class="mx-brand">
+            <span class="mx-brand-mark">✦</span>
             <span>Mapranex AI</span>
           </div>
-          <div class="mx-sidebar-copy">Secure quality engineering workspace</div>
+          <span class="mx-side-icon">⌕</span>
         </div>
-        <div class="mx-sidebar-label">Tools</div>
+        <div class="mx-new">＋ New analysis</div>
+        <div class="mx-section">Tools</div>
         """,
         unsafe_allow_html=True,
     )
 
     page = st.radio(
         "Navigation",
-        list(TOOLS.keys()) + ["ⓘ  About"],
+        ["Requirements", "Test Cases", "API Tests", "Summarizer", "QA Assistant", "About"],
         label_visibility="collapsed",
     )
 
-    st.link_button("↗  Main website", "https://myaiteam-company.vercel.app/")
+    st.link_button("↗ Main website", "https://myaiteam-company.vercel.app/")
 
     st.markdown(
         """
-        <div class="mx-sidebar-footer">
-          <div><span class="mx-live-dot"></span>Services connected</div>
+        <div class="mx-side-bottom">
+          <div><span class="mx-live"></span>Services connected</div>
           <div style="margin-top:6px;">n8n · OmniRoute · Oracle Cloud</div>
         </div>
         """,
@@ -533,20 +601,30 @@ with st.sidebar:
     )
 
 
-if page == "ⓘ  About":
+st.markdown(
+    f"""
+    <div class="mx-topbar">
+      <div class="mx-top-title">{page if page != "About" else "About Mapranex AI"} ▾</div>
+      <div class="mx-top-actions"><span>Share</span><span>•••</span></div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+if page == "About":
     st.markdown(
         """
         <div class="mx-page-head">
-          <div class="mx-eyebrow">About</div>
           <div class="mx-page-title">Built for focused AI-assisted quality work.</div>
           <p class="mx-page-subtitle">
-            Mapranex AI Tools keeps the interface simple while n8n and OmniRoute handle secure orchestration behind the scenes.
+            Mapranex AI keeps the interface simple while n8n and OmniRoute handle secure orchestration behind the scenes.
           </p>
         </div>
         <div class="mx-about-grid">
           <div class="mx-about-card">
             <strong>Architecture</strong>
-            <span>Streamlit provides the workspace, n8n handles orchestration, and OmniRoute provides model access on the Oracle Cloud stack.</span>
+            <span>Streamlit provides the workspace, n8n handles orchestration, and OmniRoute provides model access on Oracle Cloud.</span>
           </div>
           <div class="mx-about-card">
             <strong>Security</strong>
@@ -563,7 +641,6 @@ else:
     st.markdown(
         f"""
         <div class="mx-page-head">
-          <div class="mx-eyebrow">{config["eyebrow"]}</div>
           <div class="mx-page-title">{config["title"]}</div>
           <p class="mx-page-subtitle">{config["description"]}</p>
         </div>
@@ -573,16 +650,14 @@ else:
 
     if result_key in st.session_state:
         data = st.session_state[result_key]
-
         if data and data.get("status") == "success":
             render_result(config["tool"], data.get("result") or {})
-
             with st.expander("Technical response details"):
                 st.caption(f'Request ID: {data.get("request_id", "")}')
                 st.json(data)
     else:
         st.markdown(
-            '<div class="mx-empty">Your analysis will appear here. Enter a request below to begin.</div>',
+            '<div class="mx-empty">Your result will appear here after you send a message.</div>',
             unsafe_allow_html=True,
         )
 
