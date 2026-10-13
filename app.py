@@ -212,7 +212,7 @@ st.markdown(
       .block-container {
         max-width: 980px !important;
         padding-top: 0 !important;
-        padding-bottom: 13rem !important;
+        padding-bottom: 8.5rem !important;
         margin: 0 auto !important;
       }
 
@@ -275,18 +275,6 @@ st.markdown(
         line-height:1.6;
       }
 
-      .mx-empty {
-        max-width:780px;
-        min-height: 300px;
-        margin:0 auto;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        color:#707070;
-        text-align:center;
-        font-size:13px;
-      }
-
       .mx-result-title {
         max-width:780px;
         margin:30px auto 10px;
@@ -327,7 +315,7 @@ st.markdown(
         color:#e7e7e7!important;
       }
 
-      /* ChatGPT-style bottom composer */
+      /* ChatGPT-like responsive bottom composer */
       [data-testid="stBottom"] {
         position: fixed !important;
         left: 300px !important;
@@ -335,8 +323,8 @@ st.markdown(
         bottom: 0 !important;
         width: auto !important;
         z-index: 1000 !important;
-        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 24%, #000 100%) !important;
-        padding: 30px 0 24px !important;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 34%, #000 100%) !important;
+        padding: 28px 0 18px !important;
         border: 0 !important;
       }
 
@@ -352,54 +340,52 @@ st.markdown(
 
       [data-testid="stChatInput"] {
         position: relative !important;
-        width: 780px !important;
-        max-width: calc(100vw - 350px) !important;
-        min-height: 150px !important;
+        width: min(768px, calc(100vw - 360px)) !important;
         margin: 0 auto !important;
-        border: 1px solid #3f3f3f !important;
-        border-radius: 28px !important;
+        border: 1px solid #3a3a3a !important;
+        border-radius: 26px !important;
         background: #2f2f2f !important;
-        box-shadow: 0 10px 34px rgba(0,0,0,.42) !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,.28) !important;
         overflow: hidden !important;
       }
 
       [data-testid="stChatInput"] > div,
-      [data-testid="stChatInput"] section,
-      [data-testid="stChatInput"] div {
+      [data-testid="stChatInput"] section {
         background: #2f2f2f !important;
         border: 0 !important;
       }
 
       [data-testid="stChatInput"] textarea {
         width: 100% !important;
-        min-height: 150px !important;
-        max-height: 220px !important;
-        padding: 22px 72px 50px 22px !important;
-        background: #2f2f2f !important;
+        min-height: 58px !important;
+        max-height: 200px !important;
+        padding: 18px 62px 18px 20px !important;
+        background: transparent !important;
         color: #ececec !important;
         -webkit-text-fill-color: #ececec !important;
         font-size: 16px !important;
-        line-height: 1.5 !important;
+        line-height: 1.45 !important;
         border: 0 !important;
         outline: none !important;
         box-shadow: none !important;
         resize: none !important;
+        overflow-y: auto !important;
       }
 
       [data-testid="stChatInput"] textarea::placeholder {
-        color: #8a8a8a !important;
-        -webkit-text-fill-color: #8a8a8a !important;
+        color: #8b8b8b !important;
+        -webkit-text-fill-color: #8b8b8b !important;
         opacity: 1 !important;
       }
 
       [data-testid="stChatInput"] button {
         position: absolute !important;
-        right: 14px !important;
-        bottom: 14px !important;
-        width: 38px !important;
-        height: 38px !important;
-        min-width: 38px !important;
-        min-height: 38px !important;
+        right: 11px !important;
+        bottom: 11px !important;
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
         margin: 0 !important;
         padding: 0 !important;
         border: 0 !important;
@@ -410,7 +396,7 @@ st.markdown(
       }
 
       [data-testid="stChatInput"] button:hover {
-        background: #2b95ff !important;
+        background: #2994ff !important;
       }
 
       .mx-about-grid {
@@ -450,8 +436,8 @@ st.markdown(
         }
 
         [data-testid="stChatInput"] {
-          width: calc(100vw - 28px) !important;
-          max-width: calc(100vw - 28px) !important;
+          width: calc(100vw - 24px) !important;
+          max-width: calc(100vw - 24px) !important;
         }
 
         .block-container {
@@ -712,12 +698,6 @@ else:
             with st.expander("Technical response details"):
                 st.caption(f'Request ID: {data.get("request_id", "")}')
                 st.json(data)
-    else:
-        st.markdown(
-            '<div class="mx-empty">Your result will appear here after you send a message.</div>',
-            unsafe_allow_html=True,
-        )
-
     prompt = st.chat_input(config["placeholder"])
 
     if prompt:
