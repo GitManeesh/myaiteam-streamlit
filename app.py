@@ -1,5 +1,4 @@
 import os
-import time
 import uuid
 import requests
 import streamlit as st
@@ -517,7 +516,6 @@ tabs = st.tabs(
         "API Tests",
         "Summarizer",
         "QA Assistant",
-        "Workflow",
         "About",
     ]
 )
@@ -563,78 +561,6 @@ with tabs[4]:
     )
 
 with tabs[5]:
-    st.markdown(
-        """
-        <div class="mx-tool-card">
-          <div class="mx-tool-head">
-            <div class="mx-tool-icon">↔</div>
-            <div>
-              <h3>AI Workflow Assistant</h3>
-              <p>Send a workflow or automation task through the existing secure n8n workflow gateway.</p>
-            </div>
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    webhook = get_secret("N8N_WEBHOOK_URL")
-    secret = get_secret("N8N_SHARED_SECRET")
-
-    text = st.text_area(
-        "Your request",
-        placeholder="Describe the workflow, automation, or process you want Mapranex to handle...",
-        height=220,
-        key="workflow_input",
-        label_visibility="collapsed",
-    )
-
-    col1, col2 = st.columns([1, 5])
-    with col1:
-        run_workflow = st.button(
-            "Run workflow",
-            type="primary",
-            key="workflow_button",
-            use_container_width=True,
-        )
-
-    if run_workflow:
-        if not webhook or not secret:
-            st.error("Workflow webhook or shared secret is not configured.")
-        elif not text.strip():
-            st.warning("Enter a request first.")
-        else:
-            payload = {
-                "tool": "workflow_assistant",
-                "message": text.strip(),
-                "source": "myaiteam-streamlit",
-                "request_id": str(uuid.uuid4()),
-            }
-            headers = {
-                "Content-Type": "application/json",
-                "X-Mapranex-Token": secret,
-            }
-
-            with st.spinner("Running workflow..."):
-                try:
-                    response = requests.post(
-                        webhook,
-                        json=payload,
-                        headers=headers,
-                        timeout=30,
-                    )
-                    response.raise_for_status()
-                    data = response.json()
-
-                    if data.get("status") == "success":
-                        st.success("Workflow completed.")
-                    st.json(data)
-
-                except requests.RequestException:
-                    st.error("The workflow returned an error. Check n8n.")
-
-
-with tabs[6]:
     st.markdown(
         """
         <div class="mx-about-grid">
