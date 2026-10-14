@@ -56,42 +56,55 @@ st.markdown(
         display: none !important;
       }
 
-      /* Sidebar */
+      /* Sidebar — compact ChatGPT-style layout */
       [data-testid="stSidebar"] {
         width: 300px !important;
         min-width: 300px !important;
         background: var(--sidebar) !important;
-        border-right: 1px solid var(--line) !important;
+        border-right: 1px solid #242424 !important;
       }
 
       [data-testid="stSidebar"] > div:first-child {
-        padding: 0 8px 18px !important;
+        padding: 0 !important;
       }
 
-      .mx-brand-wrap {
-        padding: 4px 0 16px;
-        border-bottom: 1px solid var(--line);
-        margin: 0 0 14px;
+      [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+        gap: 0 !important;
+      }
+
+      .mx-side-shell {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 12px 10px 14px;
+        box-sizing: border-box;
+      }
+
+      .mx-side-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 42px;
+        padding: 2px 6px 10px;
       }
 
       .mx-brand {
         display: inline-flex;
         align-items: center;
         color: #fff;
-        font-size: 23px;
+        font-size: 21px;
         font-weight: 800;
-        letter-spacing: -1.35px;
+        letter-spacing: -1.2px;
         white-space: nowrap;
-        margin: 0;
-        padding: 0;
+        text-decoration: none;
       }
 
       .mx-brand img {
-        width: 36px;
-        height: 36px;
+        width: 30px;
+        height: 30px;
         object-fit: contain;
-        margin: 0 10px 0 0;
         display: block;
+        margin-right: 9px;
       }
 
       .mx-brand .cyan,
@@ -99,81 +112,97 @@ st.markdown(
         color: var(--cyan);
       }
 
-      .mx-brand-sub {
-        margin: 3px 0 0 46px;
-        color: #6f6f6f;
+      .mx-side-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: #777;
+        font-size: 15px;
+      }
+
+      .mx-side-divider {
+        height: 1px;
+        background: #202020;
+        margin: 4px 0 10px;
+      }
+
+      .mx-side-section {
+        margin: 8px 9px 6px;
+        color: #686868;
         font-size: 10px;
-        font-weight: 700;
+        font-weight: 800;
         letter-spacing: .9px;
         text-transform: uppercase;
       }
 
-      .mx-nav-label {
-        margin: 10px 10px 8px;
-        color: #5f5f5f;
-        font-size: 10px;
-        font-weight: 800;
-        letter-spacing: 1px;
-        text-transform: uppercase;
+      .mx-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
       }
 
-      /* Sidebar navigation buttons */
-      [data-testid="stSidebar"] .stButton {
-        margin: 0 0 2px !important;
-      }
-
-      [data-testid="stSidebar"] .stButton > button {
-        width: 100% !important;
-        min-height: 44px !important;
-        justify-content: flex-start !important;
-        padding: 0 14px !important;
-        margin: 0 0 4px !important;
-        border: 0 !important;
-        border-radius: 10px !important;
-        background: transparent !important;
-        color: #bdbdbd !important;
-        font-size: 13px !important;
-        font-weight: 650 !important;
-        box-shadow: none !important;
-        text-align: left !important;
-        transition: background .15s ease, color .15s ease, box-shadow .15s ease !important;
-      }
-
-      [data-testid="stSidebar"] .stButton > button:hover {
-        background: #202020 !important;
-        color: #fff !important;
-        transform: none !important;
-        box-shadow: inset 3px 0 0 rgba(0,212,255,.55) !important;
-      }
-
-      [data-testid="stSidebar"] .stButton > button[kind="primary"] {
-        background: #222 !important;
-        color: #fff !important;
-        box-shadow: inset 3px 0 0 var(--cyan) !important;
-      }
-
-      [data-testid="stSidebar"] .stLinkButton {
-        margin: 24px 4px 0 !important;
-        padding-top: 14px;
-        border-top: 1px solid var(--line);
-      }
-
-      [data-testid="stSidebar"] .stLinkButton > a {
+      .mx-nav-item {
+        display: flex;
+        align-items: center;
         width: 100%;
-        min-height: 42px;
-        justify-content: flex-start;
-        padding: 0 12px;
-        border-radius: 9px !important;
-        border: 1px solid #262626 !important;
-        background: #111 !important;
-        color: #c8c8c8 !important;
+        height: 38px;
+        padding: 0 10px;
+        border-radius: 8px;
+        color: #c2c2c2 !important;
+        text-decoration: none !important;
         font-size: 13px;
-        font-weight: 650;
+        font-weight: 500;
+        box-sizing: border-box;
+        transition: background .14s ease, color .14s ease;
       }
 
-      .mx-sidebar-foot {
-        margin: 13px 7px 0;
-        color: #585858;
+      .mx-nav-item:hover {
+        background: #1f1f1f;
+        color: #fff !important;
+      }
+
+      .mx-nav-item.active {
+        background: #212121;
+        color: #fff !important;
+      }
+
+      .mx-nav-icon {
+        width: 22px;
+        margin-right: 7px;
+        color: #8e8e8e;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .mx-nav-item.active .mx-nav-icon {
+        color: #fff;
+      }
+
+      .mx-side-spacer {
+        flex: 1;
+        min-height: 34px;
+      }
+
+      .mx-main-link {
+        display: flex;
+        align-items: center;
+        height: 38px;
+        padding: 0 10px;
+        border-radius: 8px;
+        color: #c2c2c2 !important;
+        text-decoration: none !important;
+        font-size: 13px;
+        font-weight: 500;
+      }
+
+      .mx-main-link:hover {
+        background: #1f1f1f;
+        color: #fff !important;
+      }
+
+      .mx-side-foot {
+        padding: 10px 10px 2px;
+        color: #555;
         font-size: 10px;
         line-height: 1.5;
       }
@@ -565,58 +594,73 @@ TOOLS = {
     },
 }
 
-if "page" not in st.session_state:
-    st.session_state.page = "Requirements"
+SLUG_TO_PAGE = {
+    "requirements": "Requirements",
+    "test-cases": "Test Cases",
+    "api-tests": "API Tests",
+    "summarizer": "Summarizer",
+    "qa-assistant": "QA Assistant",
+    "about": "About",
+}
+
+active_slug = st.query_params.get("tool", "requirements")
+if active_slug not in SLUG_TO_PAGE:
+    active_slug = "requirements"
+
+page = SLUG_TO_PAGE[active_slug]
+
+
+def nav_item(slug, label, icon):
+    active = " active" if active_slug == slug else ""
+    return (
+        f'<a class="mx-nav-item{active}" href="?tool={slug}" target="_self">'
+        f'<span class="mx-nav-icon">{icon}</span><span>{label}</span></a>'
+    )
+
 
 with st.sidebar:
+    nav_html = "".join(
+        [
+            nav_item("requirements", "Requirements", "◇"),
+            nav_item("test-cases", "Test Cases", "✓"),
+            nav_item("api-tests", "API Tests", "↗"),
+            nav_item("summarizer", "Summarizer", "≡"),
+            nav_item("qa-assistant", "QA Assistant", "✦"),
+        ]
+    )
+    about_html = nav_item("about", "About", "ⓘ")
+
     st.markdown(
-        """
-        <div class="mx-brand-wrap">
-          <div class="mx-brand">
-            <img src="https://myaiteam-company.vercel.app/images/mapranex-logo.webp" alt="Mapranex logo">
-            <span>Mapra</span><span class="cyan">nex</span><span class="period">.</span>
+        f"""
+        <div class="mx-side-shell">
+          <div class="mx-side-top">
+            <a class="mx-brand" href="?tool=requirements" target="_self">
+              <img src="https://myaiteam-company.vercel.app/images/mapranex-logo.webp" alt="Mapranex logo">
+              <span>Mapra</span><span class="cyan">nex</span><span class="period">.</span>
+            </a>
+            <div class="mx-side-actions"><span>⌕</span><span>◫</span></div>
           </div>
-          <div class="mx-brand-sub">AI Tools</div>
-        </div>
-        <div class="mx-nav-label">Tools</div>
-        """,
-        unsafe_allow_html=True,
-    )
 
-    for label in ["Requirements", "Test Cases", "API Tests", "Summarizer", "QA Assistant"]:
-        active = st.session_state.page == label
-        if st.button(
-            label,
-            key=f"nav_{label}",
-            type="primary" if active else "secondary",
-            use_container_width=True,
-        ):
-            st.session_state.page = label
-            st.rerun()
+          <div class="mx-side-divider"></div>
+          <div class="mx-side-section">Tools</div>
+          <nav class="mx-nav">{nav_html}</nav>
 
-    st.markdown('<div class="mx-nav-label" style="margin-top:18px;">More</div>', unsafe_allow_html=True)
+          <div class="mx-side-section" style="margin-top:16px;">More</div>
+          <nav class="mx-nav">{about_html}</nav>
 
-    if st.button(
-        "About",
-        key="nav_about",
-        type="primary" if st.session_state.page == "About" else "secondary",
-        use_container_width=True,
-    ):
-        st.session_state.page = "About"
-        st.rerun()
+          <div class="mx-side-spacer"></div>
 
-    st.link_button("↗  Main website", "https://myaiteam-company.vercel.app/")
-
-    st.markdown(
-        """
-        <div class="mx-sidebar-foot">
-          n8n · OmniRoute · Oracle Cloud
+          <div class="mx-side-divider"></div>
+          <a class="mx-main-link" href="https://myaiteam-company.vercel.app/" target="_blank">
+            <span class="mx-nav-icon">↗</span><span>Main website</span>
+          </a>
+          <div class="mx-side-foot">n8n · OmniRoute · Oracle Cloud</div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-page = st.session_state.page
+
 
 st.markdown(
     f"""
