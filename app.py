@@ -65,13 +65,13 @@ st.markdown(
       }
 
       [data-testid="stSidebar"] > div:first-child {
-        padding: 0 10px 18px !important;
+        padding: 0 8px 18px !important;
       }
 
       .mx-brand-wrap {
-        padding: 18px 8px 18px;
+        padding: 4px 0 16px;
         border-bottom: 1px solid var(--line);
-        margin-bottom: 14px;
+        margin: 0 0 14px;
       }
 
       .mx-brand {
@@ -82,13 +82,15 @@ st.markdown(
         font-weight: 800;
         letter-spacing: -1.35px;
         white-space: nowrap;
+        margin: 0;
+        padding: 0;
       }
 
       .mx-brand img {
         width: 36px;
         height: 36px;
         object-fit: contain;
-        margin-right: 10px;
+        margin: 0 10px 0 0;
         display: block;
       }
 
@@ -98,7 +100,7 @@ st.markdown(
       }
 
       .mx-brand-sub {
-        margin: 5px 0 0 46px;
+        margin: 3px 0 0 46px;
         color: #6f6f6f;
         font-size: 10px;
         font-weight: 700;
