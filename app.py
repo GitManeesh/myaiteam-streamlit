@@ -65,27 +65,17 @@ st.markdown(
       }
 
       [data-testid="stSidebar"] > div:first-child {
-        padding: 0 !important;
+        padding: 0 10px 14px !important;
       }
 
       [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
         gap: 0 !important;
       }
 
-      .mx-side-shell {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        padding: 12px 10px 14px;
-        box-sizing: border-box;
-      }
-
-      .mx-side-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 42px;
-        padding: 2px 6px 10px;
+      .mx-brand-wrap {
+        padding: 12px 4px 14px;
+        border-bottom: 1px solid #202020;
+        margin-bottom: 12px;
       }
 
       .mx-brand {
@@ -96,15 +86,14 @@ st.markdown(
         font-weight: 800;
         letter-spacing: -1.2px;
         white-space: nowrap;
-        text-decoration: none;
       }
 
       .mx-brand img {
         width: 30px;
         height: 30px;
         object-fit: contain;
-        display: block;
         margin-right: 9px;
+        display: block;
       }
 
       .mx-brand .cyan,
@@ -112,96 +101,85 @@ st.markdown(
         color: var(--cyan);
       }
 
-      .mx-side-actions {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        color: #777;
-        font-size: 15px;
-      }
-
-      .mx-side-divider {
-        height: 1px;
-        background: #202020;
-        margin: 4px 0 10px;
+      .mx-brand-sub {
+        margin: 4px 0 0 39px;
+        color: #696969;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: .8px;
+        text-transform: uppercase;
       }
 
       .mx-side-section {
         margin: 8px 9px 6px;
-        color: #686868;
+        color: #666;
         font-size: 10px;
         font-weight: 800;
         letter-spacing: .9px;
         text-transform: uppercase;
       }
 
-      .mx-nav {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
+      [data-testid="stSidebar"] .stButton {
+        margin: 0 !important;
       }
 
-      .mx-nav-item {
-        display: flex;
-        align-items: center;
+      [data-testid="stSidebar"] .stButton > button {
+        width: 100% !important;
+        height: 38px !important;
+        min-height: 38px !important;
+        justify-content: flex-start !important;
+        padding: 0 11px !important;
+        margin: 0 0 2px !important;
+        border: 0 !important;
+        border-radius: 8px !important;
+        background: transparent !important;
+        color: #c2c2c2 !important;
+        font-size: 13px !important;
+        font-weight: 500 !important;
+        box-shadow: none !important;
+        text-align: left !important;
+        transition: background .14s ease, color .14s ease !important;
+      }
+
+      [data-testid="stSidebar"] .stButton > button:hover {
+        background: #1f1f1f !important;
+        color: #fff !important;
+        transform: none !important;
+      }
+
+      [data-testid="stSidebar"] .stButton > button[kind="primary"] {
+        background: #212121 !important;
+        color: #fff !important;
+        box-shadow: none !important;
+      }
+
+      [data-testid="stSidebar"] .stLinkButton {
+        margin: 16px 4px 0 !important;
+        padding-top: 12px;
+        border-top: 1px solid #202020;
+      }
+
+      [data-testid="stSidebar"] .stLinkButton > a {
         width: 100%;
         height: 38px;
-        padding: 0 10px;
-        border-radius: 8px;
+        min-height: 38px;
+        justify-content: flex-start;
+        padding: 0 11px;
+        border-radius: 8px !important;
+        border: 0 !important;
+        background: transparent !important;
         color: #c2c2c2 !important;
-        text-decoration: none !important;
-        font-size: 13px;
-        font-weight: 500;
-        box-sizing: border-box;
-        transition: background .14s ease, color .14s ease;
-      }
-
-      .mx-nav-item:hover {
-        background: #1f1f1f;
-        color: #fff !important;
-      }
-
-      .mx-nav-item.active {
-        background: #212121;
-        color: #fff !important;
-      }
-
-      .mx-nav-icon {
-        width: 22px;
-        margin-right: 7px;
-        color: #8e8e8e;
-        font-size: 14px;
-        text-align: center;
-      }
-
-      .mx-nav-item.active .mx-nav-icon {
-        color: #fff;
-      }
-
-      .mx-side-spacer {
-        flex: 1;
-        min-height: 34px;
-      }
-
-      .mx-main-link {
-        display: flex;
-        align-items: center;
-        height: 38px;
-        padding: 0 10px;
-        border-radius: 8px;
-        color: #c2c2c2 !important;
-        text-decoration: none !important;
         font-size: 13px;
         font-weight: 500;
       }
 
-      .mx-main-link:hover {
-        background: #1f1f1f;
+      [data-testid="stSidebar"] .stLinkButton > a:hover {
+        background: #1f1f1f !important;
         color: #fff !important;
       }
 
       .mx-side-foot {
-        padding: 10px 10px 2px;
+        padding: 10px 9px 0;
         color: #555;
         font-size: 10px;
         line-height: 1.5;
@@ -594,72 +572,61 @@ TOOLS = {
     },
 }
 
-SLUG_TO_PAGE = {
-    "requirements": "Requirements",
-    "test-cases": "Test Cases",
-    "api-tests": "API Tests",
-    "summarizer": "Summarizer",
-    "qa-assistant": "QA Assistant",
-    "about": "About",
-}
-
-active_slug = st.query_params.get("tool", "requirements")
-if active_slug not in SLUG_TO_PAGE:
-    active_slug = "requirements"
-
-page = SLUG_TO_PAGE[active_slug]
+if "page" not in st.session_state:
+    st.session_state.page = "Requirements"
 
 
-def nav_item(slug, label, icon):
-    active = " active" if active_slug == slug else ""
-    return (
-        f'<a class="mx-nav-item{active}" href="?tool={slug}" target="_self">'
-        f'<span class="mx-nav-icon">{icon}</span><span>{label}</span></a>'
-    )
+def set_page(label):
+    st.session_state.page = label
 
 
 with st.sidebar:
-    nav_html = "".join(
-        [
-            nav_item("requirements", "Requirements", "◇"),
-            nav_item("test-cases", "Test Cases", "✓"),
-            nav_item("api-tests", "API Tests", "↗"),
-            nav_item("summarizer", "Summarizer", "≡"),
-            nav_item("qa-assistant", "QA Assistant", "✦"),
-        ]
-    )
-    about_html = nav_item("about", "About", "ⓘ")
-
     st.markdown(
-        f"""
-        <div class="mx-side-shell">
-          <div class="mx-side-top">
-            <a class="mx-brand" href="?tool=requirements" target="_self">
-              <img src="https://myaiteam-company.vercel.app/images/mapranex-logo.webp" alt="Mapranex logo">
-              <span>Mapra</span><span class="cyan">nex</span><span class="period">.</span>
-            </a>
-            <div class="mx-side-actions"><span>⌕</span><span>◫</span></div>
+        """
+        <div class="mx-brand-wrap">
+          <div class="mx-brand">
+            <img src="https://myaiteam-company.vercel.app/images/mapranex-logo.webp" alt="Mapranex logo">
+            <span>Mapra</span><span class="cyan">nex</span><span class="period">.</span>
           </div>
-
-          <div class="mx-side-divider"></div>
-          <div class="mx-side-section">Tools</div>
-          <nav class="mx-nav">{nav_html}</nav>
-
-          <div class="mx-side-section" style="margin-top:16px;">More</div>
-          <nav class="mx-nav">{about_html}</nav>
-
-          <div class="mx-side-spacer"></div>
-
-          <div class="mx-side-divider"></div>
-          <a class="mx-main-link" href="https://myaiteam-company.vercel.app/" target="_blank">
-            <span class="mx-nav-icon">↗</span><span>Main website</span>
-          </a>
-          <div class="mx-side-foot">n8n · OmniRoute · Oracle Cloud</div>
+          <div class="mx-brand-sub">AI Tools</div>
         </div>
+        <div class="mx-side-section">Tools</div>
         """,
         unsafe_allow_html=True,
     )
 
+    for label in ["Requirements", "Test Cases", "API Tests", "Summarizer", "QA Assistant"]:
+        st.button(
+            label,
+            key=f"nav_{label}",
+            type="primary" if st.session_state.page == label else "secondary",
+            use_container_width=True,
+            on_click=set_page,
+            args=(label,),
+        )
+
+    st.markdown(
+        '<div class="mx-side-section" style="margin-top:14px;">More</div>',
+        unsafe_allow_html=True,
+    )
+
+    st.button(
+        "About",
+        key="nav_about",
+        type="primary" if st.session_state.page == "About" else "secondary",
+        use_container_width=True,
+        on_click=set_page,
+        args=("About",),
+    )
+
+    st.link_button("Main website ↗", "https://myaiteam-company.vercel.app/")
+
+    st.markdown(
+        '<div class="mx-side-foot">n8n · OmniRoute · Oracle Cloud</div>',
+        unsafe_allow_html=True,
+    )
+
+page = st.session_state.page
 
 
 st.markdown(
