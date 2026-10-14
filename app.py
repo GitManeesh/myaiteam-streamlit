@@ -109,7 +109,7 @@ st.markdown(
       }
 
       .mx-nav-label {
-        margin: 0 10px 8px;
+        margin: 10px 10px 8px;
         color: #5f5f5f;
         font-size: 10px;
         font-weight: 800;
@@ -119,39 +119,41 @@ st.markdown(
 
       /* Sidebar navigation buttons */
       [data-testid="stSidebar"] .stButton {
-        margin: 0 !important;
+        margin: 0 0 2px !important;
       }
 
       [data-testid="stSidebar"] .stButton > button {
         width: 100% !important;
-        min-height: 42px !important;
+        min-height: 44px !important;
         justify-content: flex-start !important;
-        padding: 0 12px !important;
+        padding: 0 14px !important;
         margin: 0 0 4px !important;
         border: 0 !important;
-        border-radius: 9px !important;
+        border-radius: 10px !important;
         background: transparent !important;
         color: #bdbdbd !important;
         font-size: 13px !important;
-        font-weight: 600 !important;
+        font-weight: 650 !important;
         box-shadow: none !important;
         text-align: left !important;
+        transition: background .15s ease, color .15s ease, box-shadow .15s ease !important;
       }
 
       [data-testid="stSidebar"] .stButton > button:hover {
-        background: var(--panel-hover) !important;
+        background: #202020 !important;
         color: #fff !important;
         transform: none !important;
+        box-shadow: inset 3px 0 0 rgba(0,212,255,.55) !important;
       }
 
       [data-testid="stSidebar"] .stButton > button[kind="primary"] {
-        background: #202020 !important;
+        background: #222 !important;
         color: #fff !important;
         box-shadow: inset 3px 0 0 var(--cyan) !important;
       }
 
       [data-testid="stSidebar"] .stLinkButton {
-        margin: 18px 4px 0 !important;
+        margin: 24px 4px 0 !important;
         padding-top: 14px;
         border-top: 1px solid var(--line);
       }
