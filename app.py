@@ -56,16 +56,16 @@ st.markdown(
         display: none !important;
       }
 
-      /* Sidebar — compact ChatGPT-style layout */
+      /* Sidebar — ChatGPT-inspired compact layout */
       [data-testid="stSidebar"] {
         width: 300px !important;
         min-width: 300px !important;
-        background: var(--sidebar) !important;
+        background: #050505 !important;
         border-right: 1px solid #242424 !important;
       }
 
       [data-testid="stSidebar"] > div:first-child {
-        padding: 0 10px 14px !important;
+        padding: 0 10px 16px !important;
       }
 
       [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
@@ -73,18 +73,17 @@ st.markdown(
       }
 
       .mx-brand-wrap {
-        padding: 12px 4px 14px;
-        border-bottom: 1px solid #202020;
-        margin-bottom: 12px;
+        padding: 10px 4px 12px;
+        margin: 0 0 8px;
       }
 
       .mx-brand {
         display: inline-flex;
         align-items: center;
         color: #fff;
-        font-size: 21px;
+        font-size: 20px;
         font-weight: 800;
-        letter-spacing: -1.2px;
+        letter-spacing: -1.15px;
         white-space: nowrap;
       }
 
@@ -92,7 +91,7 @@ st.markdown(
         width: 30px;
         height: 30px;
         object-fit: contain;
-        margin-right: 9px;
+        margin: 0 9px 0 0;
         display: block;
       }
 
@@ -102,73 +101,113 @@ st.markdown(
       }
 
       .mx-brand-sub {
-        margin: 4px 0 0 39px;
-        color: #696969;
+        margin: 3px 0 0 39px;
+        color: #686868;
         font-size: 9px;
         font-weight: 700;
         letter-spacing: .8px;
         text-transform: uppercase;
       }
 
+      .mx-side-divider {
+        height: 1px;
+        background: #202020;
+        margin: 4px 0 8px;
+      }
+
       .mx-side-section {
-        margin: 8px 9px 6px;
-        color: #666;
+        margin: 8px 10px 6px;
+        color: #626262;
         font-size: 10px;
-        font-weight: 800;
-        letter-spacing: .9px;
-        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: .8px;
       }
 
-      [data-testid="stSidebar"] .stButton {
-        margin: 0 !important;
+      /* Compact radio navigation without radio circles */
+      [data-testid="stSidebar"] [data-testid="stRadio"] > label {
+        display: none !important;
       }
 
-      [data-testid="stSidebar"] .stButton > button {
+      [data-testid="stSidebar"] [role="radiogroup"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+      }
+
+      [data-testid="stSidebar"] [role="radiogroup"] > label {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
         width: 100% !important;
-        height: 38px !important;
         min-height: 38px !important;
-        justify-content: flex-start !important;
-        padding: 0 11px !important;
-        margin: 0 0 2px !important;
-        border: 0 !important;
+        height: 38px !important;
+        padding: 0 10px !important;
+        margin: 0 !important;
         border-radius: 8px !important;
         background: transparent !important;
-        color: #c2c2c2 !important;
-        font-size: 13px !important;
-        font-weight: 500 !important;
-        box-shadow: none !important;
-        text-align: left !important;
+        color: #bdbdbd !important;
+        cursor: pointer !important;
+        box-sizing: border-box !important;
         transition: background .14s ease, color .14s ease !important;
       }
 
-      [data-testid="stSidebar"] .stButton > button:hover {
+      [data-testid="stSidebar"] [role="radiogroup"] > label:hover {
         background: #1f1f1f !important;
         color: #fff !important;
-        transform: none !important;
       }
 
-      [data-testid="stSidebar"] .stButton > button[kind="primary"] {
-        background: #212121 !important;
+      [data-testid="stSidebar"] [role="radiogroup"] > label:has(input:checked) {
+        background: #202020 !important;
         color: #fff !important;
-        box-shadow: none !important;
+      }
+
+      /* Hide all radio indicator visuals */
+      [data-testid="stSidebar"] [role="radiogroup"] input[type="radio"] {
+        position: absolute !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        width: 0 !important;
+        height: 0 !important;
+      }
+
+      [data-testid="stSidebar"] [role="radiogroup"] > label > div:first-child {
+        display: none !important;
+        width: 0 !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      [data-testid="stSidebar"] [role="radiogroup"] > label > div:last-child {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      [data-testid="stSidebar"] [role="radiogroup"] p {
+        margin: 0 !important;
+        color: inherit !important;
+        font-size: 13px !important;
+        font-weight: 500 !important;
+        line-height: 38px !important;
       }
 
       [data-testid="stSidebar"] .stLinkButton {
-        margin: 16px 4px 0 !important;
-        padding-top: 12px;
+        margin: 14px 4px 0 !important;
+        padding-top: 10px;
         border-top: 1px solid #202020;
       }
 
       [data-testid="stSidebar"] .stLinkButton > a {
         width: 100%;
-        height: 38px;
         min-height: 38px;
+        height: 38px;
         justify-content: flex-start;
-        padding: 0 11px;
+        padding: 0 10px;
         border-radius: 8px !important;
         border: 0 !important;
         background: transparent !important;
-        color: #c2c2c2 !important;
+        color: #bdbdbd !important;
         font-size: 13px;
         font-weight: 500;
       }
@@ -179,10 +218,10 @@ st.markdown(
       }
 
       .mx-side-foot {
-        padding: 10px 9px 0;
-        color: #555;
+        padding: 8px 10px 0;
+        color: #505050;
         font-size: 10px;
-        line-height: 1.5;
+        line-height: 1.45;
       }
 
       /* Main */
@@ -572,13 +611,10 @@ TOOLS = {
     },
 }
 
+NAV_ITEMS = ["Requirements", "Test Cases", "API Tests", "Summarizer", "QA Assistant", "About"]
+
 if "page" not in st.session_state:
     st.session_state.page = "Requirements"
-
-
-def set_page(label):
-    st.session_state.page = label
-
 
 with st.sidebar:
     st.markdown(
@@ -590,34 +626,23 @@ with st.sidebar:
           </div>
           <div class="mx-brand-sub">AI Tools</div>
         </div>
+        <div class="mx-side-divider"></div>
         <div class="mx-side-section">Tools</div>
         """,
         unsafe_allow_html=True,
     )
 
-    for label in ["Requirements", "Test Cases", "API Tests", "Summarizer", "QA Assistant"]:
-        st.button(
-            label,
-            key=f"nav_{label}",
-            type="primary" if st.session_state.page == label else "secondary",
-            use_container_width=True,
-            on_click=set_page,
-            args=(label,),
-        )
+    current_index = NAV_ITEMS.index(st.session_state.page) if st.session_state.page in NAV_ITEMS else 0
 
-    st.markdown(
-        '<div class="mx-side-section" style="margin-top:14px;">More</div>',
-        unsafe_allow_html=True,
+    page = st.radio(
+        "Navigation",
+        NAV_ITEMS,
+        index=current_index,
+        label_visibility="collapsed",
+        key="sidebar_navigation",
     )
 
-    st.button(
-        "About",
-        key="nav_about",
-        type="primary" if st.session_state.page == "About" else "secondary",
-        use_container_width=True,
-        on_click=set_page,
-        args=("About",),
-    )
+    st.session_state.page = page
 
     st.link_button("Main website ↗", "https://myaiteam-company.vercel.app/")
 
